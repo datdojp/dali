@@ -6,6 +6,7 @@ public class ProductDto extends BaseDto {
 	private CategoryMst category;
 	private CategoryMst subCat;
 	private String name;
+	private String nameSearch;
 	private String detail;
 	private Long price;
 	private Long salePrice;
@@ -73,5 +74,11 @@ public class ProductDto extends BaseDto {
 	}
 	public void setSale(Boolean sale) {
 		this.sale = sale;
+	}
+	public String getNameSearch() {
+		return nameSearch;
+	}
+	public void setNameSearch(String nameSearch) {
+		this.nameSearch = nameSearch;
 	}
 }

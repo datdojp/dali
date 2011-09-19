@@ -5,28 +5,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import vn.kohana.dto.BaseDto;
+import vn.kohana.dto.ProductDto;
+import vn.kohana.mst.CategoryMst;
 
 //TODO refine it
 public class KohanaUtils {
-	
-	//PASSWORD ENCRYPTION
-	//TODO
-	public static String encryptPassword(String password) {
-		return password;
-	}
-	//TODO
-	public static String decryptPassword(String encryptedPass) {
-		return encryptedPass;
-	}
-	public static String getRandomPassword() {
-		return Long.toString(Calendar.getInstance().getTimeInMillis());
-	}
-	
-	//TODO
-	public static boolean checkPasswordSafeEnough(String password) {
-		return true;
-	}
-	
 	//VALIDATOR
 	public static boolean isEmpty(String str) {
 		return str == null || "".equals(str);
@@ -41,33 +24,18 @@ public class KohanaUtils {
 		return arr == null || arr.length == 0;
 	}
 	
-	//FORMATTER
-	public static String getLogForCollection(List dtos) {
-		String log = "";
-		if(!isEmpty(dtos)) {
-			for(Object aDto : dtos) {
-				log = log + "\n" + ((BaseDto)aDto).forLog();
+	public static String getImageFilename(Object dto) {
+		if(dto == null) {
+			String result = "";
+			if(dto instanceof CategoryMst) {
+				result = "cat" + ((CategoryMst) dto).getCode();
+			} else if(dto instanceof ProductDto) {
+				result = "prd" + ((ProductDto) dto).getId();
 			}
 		}
-		return log;
+		return null;
 	}
-	public static String getImageFilename(BaseDto dto) {
-		if(dto == null || !isValidId(dto.getId())) {
-			return "";
-		}
-		String result = "";
-		if(dto instanceof SingerDto) {
-			result = "sng";
-		} else if(dto instanceof ComposerDto) {
-			result = "cmp";
-		} else if(dto instanceof UserDto) {
-			result = "usr";
-		} else {
-			return "";
-		}
-		
-		return result + dto.getId();
-	}
+	
 	public static String getFileExtension(String filename) {
 		if(isEmpty(filename)) {
 			return "";
@@ -91,6 +59,7 @@ public class KohanaUtils {
 		}
 		return null;//not found
 	}
+	
 	public static int getDtoIndex(Integer id, List list) {
 		if(KohanaUtils.isEmpty(list)) {
 			return -1;
@@ -105,6 +74,7 @@ public class KohanaUtils {
 		}
 		return -1;
 	}
+	
 	public static int getDtoIndex(BaseDto dto, List list) {
 		if(dto == null) {
 			return -1;

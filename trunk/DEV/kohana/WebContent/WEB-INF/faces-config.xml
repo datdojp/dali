@@ -6,7 +6,14 @@
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
-	<lifecycle>
-		<phase-listener>net.aihat.listener.AihatPhaseListener</phase-listener>
-	</lifecycle>
+	
+	<managed-bean>
+		<managed-bean-name>homePageBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.client.HomePageBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>productService</property-name>
+			<value>#{productService}</value>
+		</managed-property>
+	</managed-bean>
 </faces-config>

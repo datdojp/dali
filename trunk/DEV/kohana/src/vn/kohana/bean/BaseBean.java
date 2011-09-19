@@ -1,5 +1,20 @@
 package vn.kohana.bean;
 
-public class BaseBean {
+import java.io.Serializable;
 
+import vn.kohana.service.ProductService;
+
+public abstract class BaseBean implements Serializable {
+	private ProductService productService;
+
+	//getter setter
+	public ProductService getProductService() {
+		return productService;
+	}
+
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
+	}
+	
+	
 }

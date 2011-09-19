@@ -1,6 +1,8 @@
 package vn.kohana.mst;
 
-public abstract class BaseMst {
+import java.io.Serializable;
+
+public abstract class BaseMst implements Serializable {
 	protected String code;
 
 	public String getCode() {

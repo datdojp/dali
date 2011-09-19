@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="product">
-	<select id="searchProduct" resultClass="vn.kohana.dto.ProductDto">
-		SELECT
-			id,
-			category_code as `category.code`,
-			subcat_code as `subCat.code`,
-			name,
-			detail,
-			price,
-			sale_price as salePrice,
-			quantity,
-			image,
-			special,
-			sale
-		FROM product p
-		WHERE
-			
+	<select id="searchProduct" parameterClass="vn.kohana.criteria.ProductCriteria" resultClass="vn.kohana.dto.ProductDto">
+		select
+			p.category_code as `category.code`,
+			p.subcat_code as `subCat.code`,
+			p.name,
+			p.detail,
+			p.price,
+			p.sale_price as salePrice,
+			p.quantity,
+			p.image,
+			p.special,
+			p.sale,
+			p.name_search as nameSearch
+		from
+			product p
+		<dynamic prepend="where">
+			<isNotNull property="id" removeFirstPrepend="true">
+				p.id = #id#
+			</isNotNull>
+			<isNotNull property="special" removeFirstPrepend="true">
+				p.special = #special#
+			</isNotNull>
+			<isNotNull property="sale" removeFirstPrepend="true">
+				p.sale = #sale#
+			</isNotNull>
+		</dynamic>
 	</select>
 </sqlMap>

@@ -12,17 +12,8 @@ public abstract class BaseCriteria implements Serializable, Cloneable {
 	}
 	
 	private Integer id;
-	private SortCriterion sortCriterion;
 	private PagingCriterion pagingCriterion;
 	private boolean forCounting;
-
-	public SortCriterion getSortCriterion() {
-		return sortCriterion;
-	}
-
-	public void setSortCriterion(SortCriterion sortCriterion) {
-		this.sortCriterion = sortCriterion;
-	}
 
 	public Integer getId() {
 		return id;

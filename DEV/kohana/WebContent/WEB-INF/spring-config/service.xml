@@ -7,6 +7,14 @@
 		<property name="productDao">
 			<ref bean="productDao"/>
 		</property>
+		<property name="orderDao">
+			<ref bean="orderDao"/>
+		</property>
+		<property name="mstDao">
+			<ref bean="mstDao"/>
+		</property>
 	</bean>
 	<bean id="productService" class="vn.kohana.service.ProductService" parent="baseService"/>
+	<bean id="orderService" class="vn.kohana.service.OrderService" parent="baseService"/>
+	<bean id="mstService" class="vn.kohana.service.MstService" parent="baseService"/>
 </beans>

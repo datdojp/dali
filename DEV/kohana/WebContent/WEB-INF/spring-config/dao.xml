@@ -6,4 +6,7 @@
 	<bean id="baseDao" class="vn.kohana.dao.BaseDao" abstract="true" scope="application">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
+	<bean id="productDao" class="vn.kohana.dao.ProductDao" parent="baseDao"/>
+	<bean id="orderDao" class="vn.kohana.dao.OrderDao" parent="baseDao"/>
+	<bean id="mstDao" class="vn.kohana.dao.MstDao" parent="baseDao"/>
 </beans>		

@@ -7,6 +7,7 @@
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
 	
+	<!-- CLIENT -->
 	<managed-bean>
 		<managed-bean-name>homePageBean</managed-bean-name>
 		<managed-bean-class>vn.kohana.bean.client.HomePageBean</managed-bean-class>
@@ -15,5 +16,54 @@
 			<property-name>productService</property-name>
 			<value>#{productService}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>orderService</property-name>
+			<value>#{orderService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mstService</property-name>
+			<value>#{mstService}</value>
+		</managed-property>
 	</managed-bean>
+	
+	
+	<!-- ======================================================================================================== -->
+	
+	
+	<!-- ADMIN -->
+	<managed-bean>
+		<managed-bean-name>manageProductBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.admin.ManageProductBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>productService</property-name>
+			<value>#{productService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>orderService</property-name>
+			<value>#{orderService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mstService</property-name>
+			<value>#{mstService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>mstBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.MstBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>productService</property-name>
+			<value>#{productService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>orderService</property-name>
+			<value>#{orderService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mstService</property-name>
+			<value>#{mstService}</value>
+		</managed-property>
+	</managed-bean>
+	
 </faces-config>

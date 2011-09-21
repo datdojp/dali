@@ -9,7 +9,7 @@
 <ui:composition template="Client-template.xhtml">
 	<ui:param name="title" value="Trang chủ" />
 	<ui:define name="body">
-		<h:form id="manageProduct">
+		<h:form id="manageProduct_criteria">
 			<h:panelGrid columns=2>
 				<h:outputText value="ID"/>
 				<h:inputText value="#{manageProductBean.id}"/>
@@ -17,13 +17,90 @@
 				<h:outputText value="Nhóm"/>
 				<h:selectOneListbox value="#{manageProductBean.cateCode}" size="1">
 					<f:selectItem itemLabel="" itemValue=""/>
-					<c:forEach items="#{mstBean.allSupCategories}" var="aSupCat">
-						<f:selectItem itemLabel="#{aSupCat.name}" itemValue="#{aSupCat.code}" />
+					<c:forEach items="#{mstBean.allCategories}" var="aCat">
+						<f:selectItem itemLabel="#{aCat.name}" itemValue="#{aCat.code}" />
 					</c:forEach>
-					<f:ajax event="select" execute="@form" />
+					<f:ajax event="select" execute="@form" render="@form" listener="#{managerProduct.loadSubCats}"/>
 				</h:selectOneListbox>
 				
+				<h:outputText value="Nhóm con"/>
+				<h:selectOneListbox value="#{manageProductBean.subcatCode}" size="1">
+					<f:selectItem itemLabel="" itemValue=""/>
+					<c:forEach items="#{manageProductBean.subCats}" var="aSubCat">
+						<f:selectItem itemLabel="#{aSubCat.name}" itemValue="#{aSubCat.code}" />
+					</c:forEach>
+				</h:selectOneListbox>
+				
+				<h:outputText value="Tên"/>
+				<h:inputText value="#{manageProductBean.name}"/>
+				
+				<h:outputText value="Đặc biệt"/>
+				<h:selectOneListbox value="#{manageProductBean.special}" size="1">
+					<f:selectItem itemLabel="Cả hai" itemValue="both"/>
+					<f:selectItem itemLabel="Bình thường" itemValue="normal"/>
+					<f:selectItem itemLabel="Đặc biệt" itemValue="special"/>
+				</h:selectOneListbox>
+				
+				<h:outputText value="Khuyến mãi"/>
+				<h:selectOneListbox value="#{manageProductBean.special}" size="1">
+					<f:selectItem itemLabel="Cả hai" itemValue="both"/>
+					<f:selectItem itemLabel="Không khuyến mãi" itemValue="nosale"/>
+					<f:selectItem itemLabel="Khuyến mãi" itemValue="sale"/>
+				</h:selectOneListbox>
+				
+				<h:commandButton value="Tìm kiếm" action="#{manageProductBean.search}"/>
+				<h:commandButton value="Xóa" action="#{manageProductBean.clear}"/>
 			</h:panelGrid>
+		</h:form>
+		
+		<h:form id="manageProduct_results">
+			<h3>Kết quả tìm kiếm</h3>
+			<br></br>
+			#{manageProductBean.nSearchResults} kết quả
+			<br></br>
+			<h:commandButton value="Thêm sản phẩm" action="">
+			</h:commandButton>
+			<br></br>
+			<table border="1">
+				<th>
+					<td></td>
+					<td>ID</td>
+					<td>Nhóm</td>
+					<td>Nhóm con</td>
+					<td>Tên</td>
+					<td>Mô tả</td>
+					<td>Giá</td>
+					<td>Giá khuyến mãi</td>
+					<td>Số lượng</td>
+					<td>Hình ảnh</td>
+					<td>Đặc biệt</td>
+					<td>Khuyến mãi</td>
+				</th>
+				<c:forEach var="aProduct" items="#{manageProductBean.searchResults}">
+					<tr>
+						<td>	
+							<h:commandButton value="Xóa" action="#{manageProductBean.delete}">
+								<f:setPropertyActionListener target="#{manageProductBean.deletedProductId}" value="#{aProduct.id}"/>
+							</h:commandButton>
+						</td>
+						<td>#{aProduct.id}</td>
+						<td>#{aProduct.category.name}</td>
+						<td>#{aProduct.subCat.name}</td>
+						<td>#{aProduct.name}</td>
+						<td>#{aProduct.detail}</td>
+						<td>#{aProduct.price}</td>
+						<td>#{aProduct.salePrice}</td>
+						<td>#{aProduct.quantity}</td>
+						<td>#{aProduct.image}</td>
+						<td>
+							<h:outputText value="Đặc biệt" rendered="#{aProduct.special}"/>
+						</td>
+						<td>
+							<h:outputText value="Khuyến mãi" rendered="#{aProduct.sale}"/>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</h:form>
 	</ui:define>
 </ui:composition>

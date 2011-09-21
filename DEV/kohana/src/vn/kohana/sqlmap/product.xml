@@ -3,8 +3,11 @@
 <sqlMap namespace="product">
 	<select id="searchProduct" parameterClass="vn.kohana.criteria.ProductCriteria" resultClass="vn.kohana.dto.ProductDto">
 		select
+			p.id,
 			p.category_code as `category.code`,
+			cat.name as `category.name`,
 			p.subcat_code as `subCat.code`,
+			subcat.name as `subCat.code`,
 			p.name,
 			p.detail,
 			p.price,
@@ -15,15 +18,27 @@
 			p.sale,
 			p.name_search as nameSearch
 		from
-			product p
-		<dynamic prepend="where">
-			<isNotNull property="id" removeFirstPrepend="true">
+			product p, category_mst cat, category_mst subcat
+		where
+			p.category_code = cat.code and
+			p.subcat_code = subcat.code
+		<dynamic>
+			<isNotNull property="id" prepend="and">
 				p.id = #id#
 			</isNotNull>
-			<isNotNull property="special" removeFirstPrepend="true">
+			<isNotNull property="cateCode" prepend="and">
+				p.category_code = #cateCode#
+			</isNotNull>
+			<isNotNull property="subcatCode" prepend="and">
+				p.subcat_code = #subcatCode#
+			</isNotNull>
+			<isNotNull property="name" prepend="and">
+				p.name like #name#
+			</isNotNull>
+			<isNotNull property="special" prepend="and">
 				p.special = #special#
 			</isNotNull>
-			<isNotNull property="sale" removeFirstPrepend="true">
+			<isNotNull property="sale" prepend="and">
 				p.sale = #sale#
 			</isNotNull>
 		</dynamic>

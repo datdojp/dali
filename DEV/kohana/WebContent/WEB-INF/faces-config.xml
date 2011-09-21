@@ -36,17 +36,14 @@
 		<managed-bean-class>vn.kohana.bean.MstBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
-			<property-name>productService</property-name>
-			<value>#{productService}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>orderService</property-name>
-			<value>#{orderService}</value>
-		</managed-property>
-		<managed-property>
 			<property-name>mstService</property-name>
 			<value>#{mstService}</value>
 		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>messageBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.MessageBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>manageProductBean</managed-bean-name>

@@ -43,4 +43,11 @@
 			</isNotNull>
 		</dynamic>
 	</select>
+	<insert id="insertProduct" parameterClass="vn.kohana.dto.ProductDto">
+		insert into product(category_code, subcat_code, name, detail, price, sale_price, quantity, image, special, sale, name_search)
+		values(#category.code#, #subCat.code#, #name#, #detail#, #price#, #salePrice#, #quantity#, #image#, #special#, #sale#, #nameSearch#)
+	</insert>
+	<delete id="deleteProduct" parameterClass="int">
+		delete from product where id=#id#
+	</delete>
 </sqlMap>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="Admin-template.xhtml">
+	<ui:param name="title" value="THÊM SẢN PHẨM" />
+	<ui:define name="body">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nhóm(*)"/>
+				<h:selectOneListbox value="#{createProductBean.cateCode}" size="1">
+					<c:forEach items="#{mstBean.allCategories}" var="aCat">
+						<f:selectItem itemLabel="#{aCat.name}" itemValue="#{aCat.code}" />
+					</c:forEach>
+					<f:ajax event="select" execute="@form" render="@form" listener="#{createProductBean.loadSubCats}" />
+				</h:selectOneListbox>
+				
+				<h:outputText value="Nhóm con(*)"/>
+				<h:selectOneListbox value="#{createProductBean.subcatCode}" size="1">
+					<c:forEach items="#{createProductBean.subCats}" var="aSubCat">
+						<f:selectItem itemLabel="#{aSubCat.name}" itemValue="#{aSubCat.code}" />
+					</c:forEach>
+				</h:selectOneListbox>
+				
+				<h:outputText value="Tên(*)" />
+				<h:inputText value="#{createProductBean.name}" />
+				
+				<h:outputText value="Mô tả" />
+				<h:inputText value="#{createProductBean.detail}" />
+				
+				<h:outputText value="Giá" />
+				<h:inputText value="#{createProductBean.price}" />
+				
+				<h:outputText value="Giá khuyến mãi" />
+				<h:inputText value="#{createProductBean.salePrice}" />
+				
+				<h:outputText value="Số lượng" />
+				<h:inputText value="#{createProductBean.quantity}" />
+				
+				<h:outputText value="Hình ảnh" />
+				<h:inputText value="#{createProductBean.image}" />
+				
+				<h:selectBooleanCheckbox value="#{createProductBean.special}" label="Đặc biệt"/>
+				<h:outputText value="" />
+				
+				<h:selectBooleanCheckbox value="#{createProductBean.sale}" label="Khuyến mãi" onchange="onSaleCheckboxChange(this)"/>
+				<h:outputText value="" />
+				
+				<h:commandButton action="#{createProductBean.create}" value="Thêm" />
+				<h:commandButton action="#{createProductBean.clear}" value="Xóa" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -5,22 +5,22 @@ import java.util.List;
 import vn.kohana.mst.CategoryMst;
 
 public class MstBean extends BaseBean {
-	private List<CategoryMst> allSupCategories;
+	private List<CategoryMst> allCategories;
 	
 	public MstBean() {
 		loadSupCategories();
 	}
 	
 	public void loadSupCategories() {
-		allSupCategories = getMstService().getAllSupCategories();
+		allCategories = getMstService().getAllSupCategories();
 	}
 	
 	//getter setter
-	public List<CategoryMst> getAllSupCategories() {
-		return allSupCategories;
+	public List<CategoryMst> getAllCategories() {
+		return allCategories;
 	}
 
-	public void setAllSupCategories(List<CategoryMst> allSupCategories) {
-		this.allSupCategories = allSupCategories;
+	public void setAllCategories(List<CategoryMst> allSupCategories) {
+		this.allCategories = allSupCategories;
 	}
 }

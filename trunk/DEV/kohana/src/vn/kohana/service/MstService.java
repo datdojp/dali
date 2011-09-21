@@ -13,18 +13,23 @@ public class MstService extends BaseService {
 	public List<CategoryMst> getAllSupCategories() {
 		List<CategoryMst> results = getMstDao().searchCategory(null, null);
 		for(CategoryMst supcat : results) {
-			supcat.setSubcats(getMstDao().searchCategory(null, supcat.getCode()));
+			loadSubcats(supcat);
 		}
 		return results;
 	}
 	
 	@Transactional(rollbackFor=DataAccessException.class)
 	public CategoryMst getCategory(String code) {
-		List<CategoryMst> results = getMstDao().searchCategory(code, );
+		List<CategoryMst> results = getMstDao().searchCategory(code, null);
 		if(!KohanaUtils.isEmpty(results)) {
-			return results.get(0);
+			return loadSubcats(results.get(0));
 		} else {
 			return null;
 		}
+	}
+	
+	private CategoryMst loadSubcats(CategoryMst cat) {
+		cat.setSubcats(getMstDao().searchCategory(null, cat.getCode()));
+		return cat;
 	}
 }

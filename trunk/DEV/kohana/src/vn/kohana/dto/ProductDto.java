@@ -8,9 +8,9 @@ public class ProductDto extends BaseDto {
 	private String name;
 	private String nameSearch;
 	private String detail;
-	private Long price;
-	private Long salePrice;
-	private Long quantity;
+	private Integer price;
+	private Integer salePrice;
+	private Integer quantity;
 	private String image;
 	private Boolean special;
 	private Boolean sale;
@@ -39,24 +39,6 @@ public class ProductDto extends BaseDto {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public Long getPrice() {
-		return price;
-	}
-	public void setPrice(Long price) {
-		this.price = price;
-	}
-	public Long getSalePrice() {
-		return salePrice;
-	}
-	public void setSalePrice(Long salePrice) {
-		this.salePrice = salePrice;
-	}
-	public Long getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(Long quantity) {
-		this.quantity = quantity;
-	}
 	public String getImage() {
 		return image;
 	}
@@ -80,5 +62,23 @@ public class ProductDto extends BaseDto {
 	}
 	public void setNameSearch(String nameSearch) {
 		this.nameSearch = nameSearch;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+	public Integer getSalePrice() {
+		return salePrice;
+	}
+	public void setSalePrice(Integer salePrice) {
+		this.salePrice = salePrice;
+	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import vn.kohana.dto.BaseDto;
 import vn.kohana.dto.ProductDto;
 import vn.kohana.mst.CategoryMst;
@@ -106,5 +108,18 @@ public class KohanaUtils {
 			}
 		}
 		return results;
+	}
+	
+	public static Boolean stringToBoolean(String value, String nullCase, String trueCase, String falseCase) {
+		if(StringUtils.equals(value, nullCase)) {
+			return null;
+		}
+		if(StringUtils.equals(value, trueCase)) {
+			return Boolean.TRUE;
+		}
+		if(StringUtils.equals(value, falseCase)) {
+			return Boolean.FALSE;
+		}
+		return null;
 	}
 }

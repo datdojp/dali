@@ -5,13 +5,19 @@ import java.util.List;
 
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.apache.log4j.Logger;
+
 import vn.kohana.bean.BaseBean;
 import vn.kohana.dto.ProductDto;
 import vn.kohana.mst.CategoryMst;
+import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
 import vn.kohana.utils.KohanaUtils;
 
 public class ManageProductBean extends BaseBean {
+	//log
+	private Logger logger = Logger.getLogger(ManageProductBean.class);
+	
 	//criteria
 	private String id;
 	private String cateCode;
@@ -42,7 +48,18 @@ public class ManageProductBean extends BaseBean {
 	
 	//action
 	public String search() {
-		
+		Integer intId = null;
+		if(!KohanaUtils.isEmpty(id)) {
+			try {
+				intId = Integer.parseInt(id);
+			} catch (NumberFormatException ex) {
+				BeanUtils.getMessageBean().setMessage("ID phải là số");
+				return null;
+			}
+		}
+		searchResults = getProductService().searchProduct(intId, cateCode, subcatCode, name,
+				KohanaUtils.stringToBoolean(special, "both", "special", "normal"),
+				KohanaUtils.stringToBoolean(sale, "both", "sale", "nosale"));
 		return null;
 	}
 	public String clean() {
@@ -58,8 +75,13 @@ public class ManageProductBean extends BaseBean {
 	}
 	private int deletedProductId;
 	public String delete() {
-		int idx = KohanaUtils.getDtoIndex(deletedProductId, searchResults);
-		searchResults.remove(idx);
+		try {
+			getProductService().deleteProduct(deletedProductId);
+			search();
+		} catch (Exception ex) {
+			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_COMMON_ERROR);
+			logger.error(ex);
+		}
 		return null;
 	}
 	

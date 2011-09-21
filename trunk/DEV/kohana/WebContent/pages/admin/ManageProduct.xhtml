@@ -6,11 +6,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-<ui:composition template="Client-template.xhtml">
-	<ui:param name="title" value="Trang chủ" />
+<ui:composition template="Admin-template.xhtml">
+	<ui:param name="title" value="QUẢN LÝ SẢN PHẨM" />
 	<ui:define name="body">
 		<h:form id="manageProduct_criteria">
-			<h:panelGrid columns=2>
+			<h:panelGrid columns="2">
 				<h:outputText value="ID"/>
 				<h:inputText value="#{manageProductBean.id}"/>
 				
@@ -58,7 +58,7 @@
 			<br></br>
 			#{manageProductBean.nSearchResults} kết quả
 			<br></br>
-			<h:commandButton value="Thêm sản phẩm" action="">
+			<h:commandButton value="Thêm sản phẩm" action="#{createProductBean.init()}">
 			</h:commandButton>
 			<br></br>
 			<table border="1">

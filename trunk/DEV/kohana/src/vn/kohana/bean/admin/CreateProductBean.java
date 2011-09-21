@@ -4,19 +4,26 @@ import java.util.List;
 
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.apache.log4j.Logger;
+
 import vn.kohana.bean.BaseBean;
 import vn.kohana.mst.CategoryMst;
+import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
+import vn.kohana.utils.KohanaUtils;
 
 public class CreateProductBean extends BaseBean {
+	//logger
+	private Logger logger = Logger.getLogger(CreateProductBean.class);
+	
 	//fields
 	private String cateCode;
 	private String subcatCode;
 	private String name;
 	private String detail;
-	private Long price;
-	private Long salePrice;
-	private Long quantity;
+	private String price;
+	private String salePrice;
+	private String quantity;
 	private String image;
 	private boolean special;
 	private boolean sale;
@@ -33,6 +40,65 @@ public class CreateProductBean extends BaseBean {
 	//action
 	public String init() {
 		return KohanaConstants.PAGE_ADMIN_CREATE_PRODUCT;
+	}
+	public String create() {
+		if(KohanaUtils.isEmpty(name)) {
+			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Tên");
+			return null;
+		}
+		Integer intPrice = null;
+		if(!KohanaUtils.isEmpty(price)) {
+			try {
+				intPrice = Integer.parseInt(price);
+			} catch (NumberFormatException ex) {
+				BeanUtils.getMessageBean().setMessage("Giá phải là số.");
+				return null;
+			}
+		}
+		
+		Integer intSalePrice = null;
+		if(!KohanaUtils.isEmpty(salePrice)) {
+			try {
+				intSalePrice = Integer.parseInt(salePrice);
+			} catch (NumberFormatException ex) {
+				BeanUtils.getMessageBean().setMessage("Giá khuyến mãi phải là số.");
+				return null;
+			}
+		}
+		
+		Integer intQuantity = null;
+		if(!KohanaUtils.isEmpty(quantity)) {
+			try {
+				intQuantity = Integer.parseInt(quantity);
+			} catch (NumberFormatException ex) {
+				BeanUtils.getMessageBean().setMessage("Số lượng phải là số.");
+				return null;
+			}
+		}
+		
+		try {
+			getProductService().createProduct(cateCode, subcatCode, name, detail,
+					intPrice, intSalePrice, intQuantity, image, special, sale);
+			BeanUtils.getMessageBean().setMessage("Thêm sản phẩm thành công");
+		} catch (Exception ex) {
+			BeanUtils.getMessageBean().setMessage("Có lỗi trong quá trình thêm sản phẩm. Hãy thử lại.");
+			logger.error(ex);
+		}
+		
+		return null;
+	}
+	public String clear() {
+		cateCode = null;
+		subcatCode = null;
+		name = null;
+		detail = null;
+		price = null;
+		salePrice = null;
+		quantity = null;
+		image = null;
+		special = false;
+		sale = false;
+		return null;
 	}
 	
 	//getter setter
@@ -60,24 +126,6 @@ public class CreateProductBean extends BaseBean {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public Long getPrice() {
-		return price;
-	}
-	public void setPrice(Long price) {
-		this.price = price;
-	}
-	public Long getSalePrice() {
-		return salePrice;
-	}
-	public void setSalePrice(Long salePrice) {
-		this.salePrice = salePrice;
-	}
-	public Long getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(Long quantity) {
-		this.quantity = quantity;
-	}
 	public String getImage() {
 		return image;
 	}
@@ -95,5 +143,37 @@ public class CreateProductBean extends BaseBean {
 	}
 	public void setSale(boolean sale) {
 		this.sale = sale;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(String salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
+	public List<CategoryMst> getSubCats() {
+		return subCats;
+	}
+
+	public void setSubCats(List<CategoryMst> subCats) {
+		this.subCats = subCats;
 	}
 }

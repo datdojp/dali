@@ -6,6 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import vn.kohana.bean.BaseBean;
+import vn.kohana.bean.MessageBean;
 
 //TODO refine it
 public class BeanUtils {
@@ -28,5 +29,9 @@ public class BeanUtils {
 			return config.getString(key);
 		}
 		return "";
+	}
+	
+	public static MessageBean getMessageBean() {
+		return (MessageBean) getContextBean("messageBean");
 	}
 }

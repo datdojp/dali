@@ -68,7 +68,7 @@ public class ManageProductBean extends BaseBean {
 				KohanaUtils.stringToBoolean(sale, "both", "sale", "nosale"));
 		return null;
 	}
-	public String clean() {
+	public String clear() {
 		id = null;
 		cateCode = null;
 		subcatCode = null;

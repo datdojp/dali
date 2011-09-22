@@ -13,12 +13,18 @@ public class ProductDao extends BaseDao {
 	
 	public ProductDto insert(ProductDto product) {
 		product.setNameSearch(getSearchableString(product.getName()));
-		getSqlMapClientTemplate().queryForList("insertProduct", product);
+		getSqlMapClientTemplate().insert("insertProduct", product);
 		product.setId(getLastInsertId());
 		return product;
 	}
 	
 	public void delete(int id) {
 		getSqlMapClientTemplate().delete("deleteProduct", id);
+	}
+	
+	public void update(ProductDto product) {
+		ProductDto cloned = (ProductDto) product.clone();
+		cloned.setNameSearch(getSearchableString(cloned.getName()));
+		getSqlMapClientTemplate().update("updateProduct", cloned);
 	}
 }

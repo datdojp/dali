@@ -2,21 +2,21 @@ package vn.kohana.bean.admin;
 
 import java.util.List;
 
-import javax.faces.event.AjaxBehaviorEvent;
-
 import org.apache.log4j.Logger;
 
 import vn.kohana.bean.BaseBean;
+import vn.kohana.dto.ProductDto;
 import vn.kohana.mst.CategoryMst;
 import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
 import vn.kohana.utils.KohanaUtils;
 
-public class CreateProductBean extends BaseBean {
+public class EditProductBean extends BaseBean {
 	//logger
-	private Logger logger = Logger.getLogger(CreateProductBean.class);
+	private Logger logger = Logger.getLogger(EditProductBean.class);
 	
 	//fields
+	private Integer id;
 	private String cateCode;
 	private String subcatCode;
 	private String name;
@@ -32,16 +32,29 @@ public class CreateProductBean extends BaseBean {
 	private List<CategoryMst> subCats;
 	
 	//action
+	private int edittedProductId;
 	public String init() {
-		subCats = BeanUtils.getMstBean().getAllCategories().get(0).getSubcats();
-		return KohanaConstants.PAGE_ADMIN_CREATE_PRODUCT;
+		ProductDto product = getProductService().getProduct(edittedProductId);
+		id = product.getId();
+		cateCode = product.getCategory().getCode();
+		subcatCode = product.getSubCat().getCode();
+		name = product.getName();
+		detail = product.getDetail();
+		price = KohanaUtils.integerToString(product.getPrice());
+		salePrice = KohanaUtils.integerToString(product.getSalePrice());
+		quantity = KohanaUtils.integerToString(product.getQuantity());
+		image = product.getImage();
+		special = product.getSpecial();
+		sale = product.getSale();
+		subCats = getMstService().getCategory(cateCode).getSubcats();
+		return KohanaConstants.PAGE_ADMIN_EDIT_PRODUCT;
 	}
 	public String loadSubCats() {
 		CategoryMst cat = getMstService().getCategory(cateCode);
 		subCats = cat.getSubcats();
 		return null;
 	}
-	public String create() {
+	public String update() {
 		if(KohanaUtils.isEmpty(name)) {
 			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Tên");
 			return null;
@@ -77,26 +90,14 @@ public class CreateProductBean extends BaseBean {
 		}
 		
 		try {
-			getProductService().createProduct(cateCode, subcatCode, name, detail,
+			getProductService().updateProduct(id, cateCode, subcatCode, name, detail,
 					intPrice, intSalePrice, intQuantity, image, special, sale);
-			BeanUtils.getMessageBean().setMessage("Thêm sản phẩm thành công");
-			clear();
+			BeanUtils.getMessageBean().setMessage("Sửa thông tin sản phẩm thành công");
 		} catch (Exception ex) {
-			BeanUtils.getMessageBean().setMessage("Có lỗi trong quá trình thêm sản phẩm. Hãy thử lại.");
+			BeanUtils.getMessageBean().setMessage("Có lỗi trong quá trình sửa thông tin sản phẩm. Hãy thử lại.");
 			logger.error(ex);
 		}
 		
-		return null;
-	}
-	public String clear() {
-		name = null;
-		detail = null;
-		price = null;
-		salePrice = null;
-		quantity = null;
-		image = null;
-		special = false;
-		sale = false;
 		return null;
 	}
 	
@@ -174,5 +175,11 @@ public class CreateProductBean extends BaseBean {
 
 	public void setSubCats(List<CategoryMst> subCats) {
 		this.subCats = subCats;
+	}
+	public int getEdittedProductId() {
+		return edittedProductId;
+	}
+	public void setEdittedProductId(int edittedProductId) {
+		this.edittedProductId = edittedProductId;
 	}
 }

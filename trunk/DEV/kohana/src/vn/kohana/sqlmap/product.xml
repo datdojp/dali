@@ -7,7 +7,7 @@
 			p.category_code as `category.code`,
 			cat.name as `category.name`,
 			p.subcat_code as `subCat.code`,
-			subcat.name as `subCat.code`,
+			subcat.name as `subCat.name`,
 			p.name,
 			p.detail,
 			p.price,
@@ -26,15 +26,15 @@
 			<isNotNull property="id" prepend="and">
 				p.id = #id#
 			</isNotNull>
-			<isNotNull property="cateCode" prepend="and">
+			<isNotEmpty property="cateCode" prepend="and">
 				p.category_code = #cateCode#
-			</isNotNull>
-			<isNotNull property="subcatCode" prepend="and">
+			</isNotEmpty>
+			<isNotEmpty property="subcatCode" prepend="and">
 				p.subcat_code = #subcatCode#
-			</isNotNull>
-			<isNotNull property="name" prepend="and">
+			</isNotEmpty>
+			<isNotEmpty property="name" prepend="and">
 				p.name like #name#
-			</isNotNull>
+			</isNotEmpty>
 			<isNotNull property="special" prepend="and">
 				p.special = #special#
 			</isNotNull>
@@ -50,4 +50,20 @@
 	<delete id="deleteProduct" parameterClass="int">
 		delete from product where id=#id#
 	</delete>
+	<update id="updateProduct" parameterClass="vn.kohana.dto.ProductDto">
+		update product
+		set
+			category_code = #category.code#,
+			subcat_code = #subCat.code#, 
+			name = #name#, 
+			detail = #detail#, 
+			price = #price#, 
+			sale_price = #salePrice#, 
+			quantity = #quantity#, 
+			image = #image#, 
+			special = #special#, 
+			sale = #sale#, 
+			name_search = #nameSearch#
+		where id = #id#
+	</update>
 </sqlMap>

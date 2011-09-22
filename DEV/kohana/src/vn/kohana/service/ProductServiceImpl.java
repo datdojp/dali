@@ -64,4 +64,33 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 	public void deleteProduct(int id) {
 		getProductDao().delete(id);
 	}
+
+	@Transactional(rollbackFor=DataAccessException.class)
+	public ProductDto getProduct(int id) {
+		ProductCriteria criteria = new ProductCriteria();
+		criteria.setId(id);
+		return getProductDao().search(criteria).get(0);
+	}
+
+	@Transactional(rollbackFor=DataAccessException.class)
+	public void updateProduct(Integer id, String cateCode,
+			String subcatCode, String name, String detail, Integer price,
+			Integer salePrice, Integer quantity, String image, boolean special,
+			boolean sale) {
+		ProductDto product = new ProductDto();
+		product.setId(id);
+		product.setCategory(new CategoryMst());
+		product.getCategory().setCode(cateCode);
+		product.setSubCat(new CategoryMst());
+		product.getSubCat().setCode(subcatCode);
+		product.setName(name);
+		product.setDetail(detail);
+		product.setPrice(price);
+		product.setSalePrice(salePrice);
+		product.setQuantity(quantity);
+		product.setImage(image);
+		product.setSpecial(special);
+		product.setSale(sale);
+		getProductDao().update(product);
+	}
 }

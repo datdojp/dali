@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 <ui:composition template="Admin-template.xhtml">
 	<ui:param name="title" value="QUẢN LÝ SẢN PHẨM" />
 	<ui:define name="body">
@@ -42,7 +43,7 @@
 				</h:selectOneListbox>
 				
 				<h:outputText value="Khuyến mãi"/>
-				<h:selectOneListbox value="#{manageProductBean.special}" size="1">
+				<h:selectOneListbox value="#{manageProductBean.sale}" size="1">
 					<f:selectItem itemLabel="Cả hai" itemValue="both"/>
 					<f:selectItem itemLabel="Không khuyến mãi" itemValue="nosale"/>
 					<f:selectItem itemLabel="Khuyến mãi" itemValue="sale"/>
@@ -59,16 +60,15 @@
 			<br></br>
 			#{manageProductBean.nSearchResults} kết quả
 			<br></br>
-			<h:commandButton value="Thêm sản phẩm" action="#{createProductBean.init()}">
-			</h:commandButton>
+			<h:commandButton value="Thêm sản phẩm" action="#{createProductBean.init()}"/>
 			<br></br>
 			<table border="1">
-				<th>
+				<tr>
 					<td></td>
 					<td>ID</td>
+					<td>Tên</td>
 					<td>Nhóm</td>
 					<td>Nhóm con</td>
-					<td>Tên</td>
 					<td>Mô tả</td>
 					<td>Giá</td>
 					<td>Giá khuyến mãi</td>
@@ -76,23 +76,29 @@
 					<td>Hình ảnh</td>
 					<td>Đặc biệt</td>
 					<td>Khuyến mãi</td>
-				</th>
+				</tr>
 				<c:forEach var="aProduct" items="#{manageProductBean.searchResults}">
 					<tr>
-						<td>	
-							<h:commandButton value="Xóa" action="#{manageProductBean.delete}">
-								<f:setPropertyActionListener target="#{manageProductBean.deletedProductId}" value="#{aProduct.id}"/>
-							</h:commandButton>
+						<td>
+							<t:div>
+								<h:commandButton value="Xóa" action="#{manageProductBean.delete}">
+									<f:setPropertyActionListener target="#{manageProductBean.deletedProductId}" value="#{aProduct.id}"/>
+								</h:commandButton>
+							</t:div>
 						</td>
 						<td>#{aProduct.id}</td>
+						<td>
+							<h:commandLink value="#{aProduct.name}" action="#{editProductBean.init}">
+								<f:setPropertyActionListener target="#{editProductBean.edittedProductId}" value="#{aProduct.id}" />
+							</h:commandLink>
+						</td>
 						<td>#{aProduct.category.name}</td>
 						<td>#{aProduct.subCat.name}</td>
-						<td>#{aProduct.name}</td>
 						<td>#{aProduct.detail}</td>
 						<td>#{aProduct.price}</td>
 						<td>#{aProduct.salePrice}</td>
 						<td>#{aProduct.quantity}</td>
-						<td>#{aProduct.image}</td>
+						<td><h:graphicImage url="#{aProduct.image}"/></td>
 						<td>
 							<h:outputText value="Đặc biệt" rendered="#{aProduct.special}"/>
 						</td>

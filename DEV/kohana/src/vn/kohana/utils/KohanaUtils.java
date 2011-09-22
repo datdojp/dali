@@ -122,4 +122,22 @@ public class KohanaUtils {
 		}
 		return null;
 	}
+	
+	public static String booleanToString(Boolean value, String nullCase, String trueCase, String falseCase) {
+		if(value == null) {
+			return nullCase;
+		} else if(value) {
+			return trueCase;
+		} else {
+			return falseCase;
+		}
+	}
+	
+	public static String integerToString(Integer value) {
+		if(value == null) {
+			return "";
+		} else {
+			return value.toString();
+		}
+	}
 }

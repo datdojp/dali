@@ -15,7 +15,7 @@
 				<h:inputText value="#{manageProductBean.id}"/>
 				
 				<h:outputText value="Nhóm"/>
-				<h:selectOneListbox value="#{manageProductBean.cateCode}" size="1">
+				<h:selectOneListbox value="#{manageProductBean.cateCode}" size="1" onchange="$('.btnLoadSubcat').click()">
 					<f:selectItem itemLabel="" itemValue=""/>
 					<c:forEach items="#{mstBean.allCategories}" var="aCat">
 						<f:selectItem itemLabel="#{aCat.name}" itemValue="#{aCat.code}" />
@@ -51,6 +51,7 @@
 				<h:commandButton value="Tìm kiếm" action="#{manageProductBean.search}"/>
 				<h:commandButton value="Xóa" action="#{manageProductBean.clear}"/>
 			</h:panelGrid>
+			<h:commandButton styleClass="btnLoadSubcat" style="display:none" action="#{manageProductBean.loadSubCats}"/>
 		</h:form>
 		
 		<h:form id="manageProduct_results">

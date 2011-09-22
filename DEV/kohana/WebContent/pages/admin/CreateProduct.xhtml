@@ -12,11 +12,10 @@
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputText value="Nhóm(*)"/>
-				<h:selectOneListbox value="#{createProductBean.cateCode}" size="1">
+				<h:selectOneListbox value="#{createProductBean.cateCode}" size="1" onchange="$('.btnLoadSubcat').click()">
 					<c:forEach items="#{mstBean.allCategories}" var="aCat">
 						<f:selectItem itemLabel="#{aCat.name}" itemValue="#{aCat.code}" />
 					</c:forEach>
-					<f:ajax event="select" execute="@form" render="@form" listener="#{createProductBean.loadSubCats}" />
 				</h:selectOneListbox>
 				
 				<h:outputText value="Nhóm con(*)"/>
@@ -43,16 +42,21 @@
 				
 				<h:outputText value="Hình ảnh" />
 				<h:inputText value="#{createProductBean.image}" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2">
+				<h:selectBooleanCheckbox value="#{createProductBean.special}"/>
+				<h:outputText value="Đặc biệt" />
+				<h:selectBooleanCheckbox value="#{createProductBean.sale}" onchange="onSaleCheckboxChange(this)"/>
+				<h:outputText value="Khuyến mãi" />
+			</h:panelGrid>
 				
-				<h:selectBooleanCheckbox value="#{createProductBean.special}" label="Đặc biệt"/>
-				<h:outputText value="" />
-				
-				<h:selectBooleanCheckbox value="#{createProductBean.sale}" label="Khuyến mãi" onchange="onSaleCheckboxChange(this)"/>
-				<h:outputText value="" />
-				
+			<h:panelGrid columns="2">	
 				<h:commandButton action="#{createProductBean.create}" value="Thêm" />
 				<h:commandButton action="#{createProductBean.clear}" value="Xóa" />
 			</h:panelGrid>
+			
+			<h:commandButton styleClass="btnLoadSubcat" style="display:none" action="#{createProductBean.loadSubCats}"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

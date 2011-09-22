@@ -40,13 +40,19 @@ public class ManageProductBean extends BaseBean {
 	private List<CategoryMst> subCats;
 	
 	
-	//ajax
-	public void loadSubCats(AjaxBehaviorEvent e) {
-		CategoryMst cat = getMstService().getCategory(cateCode);
-		subCats = cat.getSubcats();
-	}
-	
 	//action
+	public String init() {
+		return KohanaConstants.PAGE_ADMIN_MANAGE_PRODUCT;
+	}
+	public String loadSubCats() {
+		if(!KohanaUtils.isEmpty(cateCode)) {
+			CategoryMst cat = getMstService().getCategory(cateCode);
+			subCats = cat.getSubcats();
+		} else {
+			subCats = new ArrayList<CategoryMst>();
+		}
+		return null;
+	}
 	public String search() {
 		Integer intId = null;
 		if(!KohanaUtils.isEmpty(id)) {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import vn.kohana.bean.BaseBean;
 import vn.kohana.bean.MessageBean;
+import vn.kohana.bean.MstBean;
 
 //TODO refine it
 public class BeanUtils {
@@ -33,5 +34,9 @@ public class BeanUtils {
 	
 	public static MessageBean getMessageBean() {
 		return (MessageBean) getContextBean("messageBean");
+	}
+	
+	public static MstBean getMstBean() {
+		return (MstBean) getContextBean("mstBean");
 	}
 }

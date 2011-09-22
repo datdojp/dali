@@ -31,15 +31,15 @@ public class CreateProductBean extends BaseBean {
 	//supcat combobox
 	private List<CategoryMst> subCats;
 	
-	//ajax
-	public void loadSubCats(AjaxBehaviorEvent e) {
-		CategoryMst cat = getMstService().getCategory(cateCode);
-		subCats = cat.getSubcats();
-	}
-	
 	//action
 	public String init() {
+		subCats = BeanUtils.getMstBean().getAllCategories().get(0).getSubcats();
 		return KohanaConstants.PAGE_ADMIN_CREATE_PRODUCT;
+	}
+	public String loadSubCats() {
+		CategoryMst cat = getMstService().getCategory(cateCode);
+		subCats = cat.getSubcats();
+		return null;
 	}
 	public String create() {
 		if(KohanaUtils.isEmpty(name)) {

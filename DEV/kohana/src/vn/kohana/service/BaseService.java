@@ -1,10 +1,12 @@
 package vn.kohana.service;
 
+import java.io.Serializable;
+
 import vn.kohana.dao.MstDao;
 import vn.kohana.dao.OrderDao;
 import vn.kohana.dao.ProductDao;
 
-public abstract class BaseService {
+public abstract class BaseService implements Serializable {
 	private ProductDao productDao;
 	private OrderDao orderDao;
 	private MstDao mstDao;

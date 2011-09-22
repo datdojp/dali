@@ -30,7 +30,7 @@ CREATE TABLE `category_mst` (
   `code` char(3) NOT NULL,
   `name` varchar(256) NOT NULL,
   `image` varchar(45) DEFAULT NULL,
-  `supcat_code` char(3) NOT NULL,
+  `supcat_code` char(3) DEFAULT NULL,
   PRIMARY KEY (`code`) USING BTREE,
   KEY `FK_category_mst_1` (`supcat_code`),
   CONSTRAINT `FK_category_mst_1` FOREIGN KEY (`supcat_code`) REFERENCES `category_mst` (`code`)
@@ -41,6 +41,14 @@ CREATE TABLE `category_mst` (
 --
 
 /*!40000 ALTER TABLE `category_mst` DISABLE KEYS */;
+INSERT INTO `category_mst` (`code`,`name`,`image`,`supcat_code`) VALUES 
+ ('GIA','Hoa giả',NULL,'HOA'),
+ ('HOA','Hoa các loại',NULL,NULL),
+ ('MGC','Móc gắn chìa khóa',NULL,'QLN'),
+ ('QLN','Quà lưu niệm',NULL,NULL),
+ ('TNB','Thú nhồi bông',NULL,'QLN'),
+ ('TUO','Hoa tươi',NULL,'HOA'),
+ ('VON','Hoa vôn',NULL,'HOA');
 /*!40000 ALTER TABLE `category_mst` ENABLE KEYS */;
 
 
@@ -83,7 +91,10 @@ CREATE TABLE `order_product` (
   `order_id` int(10) unsigned NOT NULL,
   `product_id` int(10) unsigned NOT NULL,
   `quantity` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`order_id`,`product_id`)
+  PRIMARY KEY (`order_id`,`product_id`),
+  KEY `FK_order_product_2` (`product_id`),
+  CONSTRAINT `FK_order_product_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_order_product_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -158,6 +169,7 @@ CREATE TABLE `product` (
   `image` varchar(45) DEFAULT NULL,
   `special` tinyint(1) NOT NULL,
   `sale` tinyint(1) NOT NULL,
+  `name_search` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_product_1` (`category_code`) USING BTREE,
   KEY `FK_product_2` (`subcat_code`) USING BTREE,

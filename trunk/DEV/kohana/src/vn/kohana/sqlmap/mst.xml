@@ -3,16 +3,20 @@
 <sqlMap namespace="common">
 	<select id="searchCategory" parameterClass="map" resultClass="vn.kohana.mst.CategoryMst">
 		select
+			code,
 			name,
 			image,
 			supcat_code as `supcat.code`
 		from category_mst
 		<dynamic prepend="where">
-			<isNotNull property="code" removeFirstPrepend="true" prepend="and">
+			<isNotNull property="code" prepend="and">
 				code = #code#
 			</isNotNull>
+			<isNull property="supcatCode" removeFirstPrepend="true" prepend="and">
+				supcat_code is null
+			</isNull>
 			<isNotNull property="supcatCode" removeFirstPrepend="true" prepend="and">
-				supcat_code = #supcatCode# 
+				supcat_code = #supcatCode#
 			</isNotNull>
 		</dynamic>
 	</select>

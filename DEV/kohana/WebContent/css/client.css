@@ -1,0 +1,16 @@
+.menuBtn {
+	border: 1px solid #D8DFEA;
+	height: 50px;
+	padding: 5px;
+	background-color: #EDEFF4;
+}
+
+.previousPrice {
+	text-decoration: line-through;
+	color:red;
+}
+
+.price {
+	color:red;
+	font-weight: bold;
+}

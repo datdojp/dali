@@ -44,8 +44,8 @@ public class EditProductBean extends BaseBean {
 		salePrice = KohanaUtils.integerToString(product.getSalePrice());
 		quantity = KohanaUtils.integerToString(product.getQuantity());
 		image = product.getImage();
-		special = product.getSpecial();
-		sale = product.getSale();
+		special = product.isSpecial();
+		sale = product.isSale();
 		subCats = getMstService().getCategory(cateCode).getSubcats();
 		return KohanaConstants.PAGE_ADMIN_EDIT_PRODUCT;
 	}
@@ -93,6 +93,8 @@ public class EditProductBean extends BaseBean {
 			getProductService().updateProduct(id, cateCode, subcatCode, name, detail,
 					intPrice, intSalePrice, intQuantity, image, special, sale);
 			BeanUtils.getMessageBean().setMessage("Sửa thông tin sản phẩm thành công");
+			((ManageProductBean)BeanUtils.getContextBean("manageProductBean")).search();
+			return KohanaConstants.PAGE_ADMIN_MANAGE_PRODUCT;
 		} catch (Exception ex) {
 			BeanUtils.getMessageBean().setMessage("Có lỗi trong quá trình sửa thông tin sản phẩm. Hãy thử lại.");
 			logger.error(ex);

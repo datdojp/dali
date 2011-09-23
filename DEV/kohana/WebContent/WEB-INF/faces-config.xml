@@ -25,6 +25,62 @@
 			<value>#{mstService}</value>
 		</managed-property>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>showCategoryBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.client.ShowCategoryBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>productService</property-name>
+			<value>#{productService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>orderService</property-name>
+			<value>#{orderService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mstService</property-name>
+			<value>#{mstService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>searchBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.client.SearchBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>productService</property-name>
+			<value>#{productService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>orderService</property-name>
+			<value>#{orderService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mstService</property-name>
+			<value>#{mstService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cartBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.client.CartBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>productService</property-name>
+			<value>#{productService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>orderService</property-name>
+			<value>#{orderService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mstService</property-name>
+			<value>#{mstService}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>staticPagesBean</managed-bean-name>
+		<managed-bean-class>vn.kohana.bean.client.StaticPagesBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	
 	<!-- ======================================================================================================== -->

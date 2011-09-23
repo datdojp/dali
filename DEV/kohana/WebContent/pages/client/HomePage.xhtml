@@ -5,10 +5,25 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:client="http://www.kohana.vn/client">
 <ui:composition template="Client-template.xhtml">
 	<ui:param name="title" value="Trang chủ" />
 	<ui:define name="body">
+		<h3>Sản phẩm nổi bật</h3>
+		<hr></hr>
+		<h:panelGrid columns="5">
+			<c:forEach var="aProduct" items="#{homePageBean.specialProducts}">
+				<client:product data="#{aProduct}"/>
+			</c:forEach>
+		</h:panelGrid>
+		<h3>Sản phẩm khuyến mãi</h3>
+		<hr></hr>
+		<h:panelGrid columns="5">
+			<c:forEach var="aProduct" items="#{homePageBean.saleProducts}">
+				<client:product data="#{aProduct}"/>
+			</c:forEach>
+		</h:panelGrid>
 	</ui:define>
 </ui:composition>
 </html>

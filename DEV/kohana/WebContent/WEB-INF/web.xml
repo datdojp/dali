@@ -10,7 +10,7 @@
   </context-param>
   <context-param>
     <param-name>facelets.LIBRARIES</param-name>
-    <param-value>/pages/admin-taglib/admin-taglib.xml;/pages/client-taglib/client-taglib.xml</param-value>
+    <param-value>/pages/client/client-taglib.xml</param-value>
   </context-param>
   <context-param>
     <param-name>contextConfigLocation</param-name>

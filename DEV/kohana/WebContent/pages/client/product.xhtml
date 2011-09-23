@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+<ui:composition>
+	<h:panelGrid columns="1">
+		<h:graphicImage url="#{data.image}"/>
+		<h:panelGroup>
+			<h:outputText value="#{data.name}"/>
+			<h:graphicImage url="#{config.server}/img/client/hot.PNG" rendered="#{data.special}"/>
+		</h:panelGroup>
+		<h:outputText value="#{data.price}" styleClass="price" rendered="#{not data.sale}"/>
+		<h:outputText value="#{data.price}" styleClass="previousPrice" rendered="#{data.sale}"/>
+		<h:outputText value="#{data.salePrice}" styleClass="price" rendered="#{data.sale}"/>
+	</h:panelGrid>
+	
+</ui:composition>
+</html>

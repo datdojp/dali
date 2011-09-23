@@ -12,9 +12,8 @@ public class ProductDto extends BaseDto {
 	private Integer salePrice;
 	private Integer quantity;
 	private String image;
-	private Boolean special;
-	private Boolean sale;
-	
+	private boolean special;
+	private boolean sale;
 	public CategoryMst getCategory() {
 		return category;
 	}
@@ -33,35 +32,17 @@ public class ProductDto extends BaseDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public Boolean getSpecial() {
-		return special;
-	}
-	public void setSpecial(Boolean special) {
-		this.special = special;
-	}
-	public Boolean getSale() {
-		return sale;
-	}
-	public void setSale(Boolean sale) {
-		this.sale = sale;
-	}
 	public String getNameSearch() {
 		return nameSearch;
 	}
 	public void setNameSearch(String nameSearch) {
 		this.nameSearch = nameSearch;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 	public Integer getPrice() {
 		return price;
@@ -80,5 +61,23 @@ public class ProductDto extends BaseDto {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public boolean isSpecial() {
+		return special;
+	}
+	public void setSpecial(boolean special) {
+		this.special = special;
+	}
+	public boolean isSale() {
+		return sale;
+	}
+	public void setSale(boolean sale) {
+		this.sale = sale;
 	}
 }

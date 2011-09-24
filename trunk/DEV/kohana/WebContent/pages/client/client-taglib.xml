@@ -6,6 +6,6 @@
 	<namespace>http://www.kohana.vn/client</namespace>
 	<tag>
 		<tag-name>product</tag-name>
-		<source>product.xhtml</source>
+		<source>product-tag.xhtml</source>
 	</tag>
 </facelet-taglib>

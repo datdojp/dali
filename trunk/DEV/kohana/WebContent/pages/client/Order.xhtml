@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:client="http://www.kohana.vn/client">
+<ui:composition template="Client-template.xhtml">
+	<ui:param name="title" value="Trang chủ" />
+	<ui:define name="body">
+		<h:form>
+			<h4>Hãy điền đầy đủ các thông tin sau</h4>
+			<br></br>
+			<h:panelGrid columns="2">
+				<h:outputText value="Tên người đặt"/>
+				<h:inputText value="#{orderBean.orderByName}" />
+				<h:outputText value="Điện thoại người đặt"/>
+				<h:inputText value="#{orderBean.orderByPhone}"/>
+				<h:outputText value="Địa chỉ người đặt"/>
+				<h:inputText value="#{orderBean.orderByAddress}"/>
+				
+				<h:selectBooleanCheckbox value="#{orderBean.theSame}" onchange="onTheSameChanged(this)"/>
+				<h:outputText value="Người đặt và người nhận là một" />
+				
+				<h:outputText value="Tên người nhận"/>
+				<h:inputText value="#{orderBean.orderForName}" styleClass="orderFor"/>
+				<h:outputText value="Điện thoại người nhận"/>
+				<h:inputText value="#{orderBean.orderForPhone}"/>
+				<h:outputText value="Địa chỉ người nhận"/>
+				<h:inputText value="#{orderBean.orderForAddress}"/>
+				
+				
+				<h:outputText value="Phương thức thanh toán"/>
+				<h:selectOneListbox value="#{orderBean.paymentCode}" onchange="$('.btnReload').click()">
+					<f:selectItem itemLabel="Tiền mặt" itemValue="CSH"/>
+					<f:selectItem itemLabel="Chuyển khoản" itemValue="TRF"/>
+				</h:selectOneListbox>
+				
+				<h:outputText value="Tên ngân hàng" rendered="#{orderBean.paymentCode eq 'TRF'}"/>
+				<h:inputText value="#{orderBean.bankName}" rendered="#{orderBean.paymentCode eq 'TRF'}"/>
+				
+				<h:outputText value="Số tài khoản" rendered="#{orderBean.paymentCode eq 'TRF'}"/>
+				<h:inputText value="#{orderBean.bankAccountNumber}" rendered="#{orderBean.paymentCode eq 'TRF'}"/>
+			</h:panelGrid>
+			<h:commandButton styleClass="btnReload" style="display:none" action="#{orderBean.reload}"/>
+			<br></br>
+			<h:commandButton value="Đặt hàng" action="#{orderBean.submit}"/>
+			<script>
+				function onTheSameChanged(obj) {
+					if(obj.checked == 'checked') {
+						$('.orderFor').disable();
+					} else {
+						$('.orderFor').enable();
+					}
+				}
+			</script>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

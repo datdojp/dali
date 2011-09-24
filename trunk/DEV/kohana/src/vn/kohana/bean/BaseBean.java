@@ -11,6 +11,11 @@ public abstract class BaseBean implements Serializable {
 	private OrderService orderService;
 	private MstService mstService;
 	
+	//action
+	public String reload() {
+		return null;
+	}
+	
 	//getter setter
 	public ProductService getProductService() {
 		return productService;

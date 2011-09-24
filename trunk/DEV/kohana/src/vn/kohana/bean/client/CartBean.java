@@ -4,83 +4,70 @@ import java.util.ArrayList;
 import java.util.List;
 import vn.kohana.bean.BaseBean;
 import vn.kohana.dto.ProductDto;
+import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
 import vn.kohana.utils.KohanaUtils;
 
 public class CartBean extends BaseBean {
 	//data
-	private List<ProductDto> products = new ArrayList<ProductDto>();
-	private List<Integer> quantities = new ArrayList<Integer>();
+	private List<CartItem> items = new ArrayList<CartItem>();
 	
 	//action
 	private int addedProductId;
-	private int addedQuantity;
 	public String add() {
-		int idx = KohanaUtils.getDtoIndex(addedProductId, products);
-		if(idx < 0) {
-			products.add(getProductService().getProduct(addedProductId));
-			quantities.add(addedQuantity);
-		} else {
-			int quantity = quantities.get(idx) + addedQuantity;
-			quantities.set(idx, quantity);
+		for(CartItem anItem : items) {
+			if(anItem.getProduct().getId().equals(addedProductId)) {
+				anItem.setQuantity(anItem.getQuantity() + 1);
+				return null;
+			}
 		}
-		
+		items.add(new CartItem(getProductService().getProduct(addedProductId), 1));
 		return null;
 	}
 	public String view() {
 		return KohanaConstants.PAGE_CLIENT_SHOW_CART;
 	}
+	public String order() {
+		OrderBean orderBean = (OrderBean) BeanUtils.getContextBean("orderBean");
+		orderBean.setItems(items);
+		return KohanaConstants.PAGE_CLIENT_ORDER;
+	}
+	public String clear() {
+		items = new ArrayList<CartItem>();
+		return KohanaConstants.PAGE_CLIENT_HOMEPAGE;
+	}
 	
 	//utils
 	public int getTotalQuantity() {
 		int result = 0;
-		for(Integer aQuant : quantities) {
-			result += aQuant;
+		for(CartItem anItem : items) {
+			result += anItem.getQuantity();
 		}
 		return result;
 	}
 	public int getTotalMoney() {
 		int result = 0;
-		for(int i = 0; i < products.size(); i++) {
-			if(products.get(i).isSale()) {
-				result += products.get(i).getSalePrice() * quantities.get(i);
+		for(CartItem anItem : items) {
+			if(anItem.getProduct().isSale()) {
+				result += anItem.getProduct().getSalePrice() * anItem.getQuantity();
 			} else {
-				result += products.get(i).getPrice() * quantities.get(i);
+				result += anItem.getProduct().getPrice() * anItem.getQuantity();
 			}
 		}
 		return result;
 	}
-
+	
 	//getter setter
-	public List<ProductDto> getProducts() {
-		return products;
+	public List<CartItem> getItems() {
+		return items;
 	}
-
-	public void setProducts(List<ProductDto> products) {
-		this.products = products;
+	public void setItems(List<CartItem> items) {
+		this.items = items;
 	}
-
-	public List<Integer> getQuantities() {
-		return quantities;
-	}
-
-	public void setQuantities(List<Integer> quantities) {
-		this.quantities = quantities;
-	}
-
 	public int getAddedProductId() {
 		return addedProductId;
 	}
-
 	public void setAddedProductId(int addedProductId) {
 		this.addedProductId = addedProductId;
-	}
-
-	public int getAddedQuantity() {
-		return addedQuantity;
-	}
-
-	public void setAddedQuantity(int addedQuantity) {
-		this.addedQuantity = addedQuantity;
 	}
 }

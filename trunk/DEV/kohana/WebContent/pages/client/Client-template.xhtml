@@ -98,7 +98,10 @@
 										<br></br>
 										Tổng số tiền #{cartBean.totalMoney}.000 đồng.
 										<br></br>
-										<h:commandButton value="Xem giỏ hàng" action="#{cartBean.view}"/>
+										<h:panelGrid columns="2">
+											<h:commandButton value="Xem giỏ hàng" action="#{cartBean.view}"/>
+											<h:commandButton value="Đặt hàng" action="#{cartBean.order}" />
+										</h:panelGrid>
 									</h:form>
 								</td>
 							</tr>

@@ -8,30 +8,18 @@ import vn.kohana.utils.KohanaConstants;
 
 public class HomePageBean extends BaseBean {
 	//data
-	private List<ProductDto> specialProducts;
-	private List<ProductDto> saleProducts;
+	public List<ProductDto> getSpecialProducts() {
+		return getProductService().getAllSpecialProducts();
+	}
+
+	public List<ProductDto> getSaleProducts() {
+		return getProductService().getAllSaleProducts();
+	}
 	
 	//action
 	public String init() {
-		specialProducts = getProductService().getAllSpecialProducts();
-		saleProducts = getProductService().getAllSaleProducts();
 		return KohanaConstants.PAGE_CLIENT_HOMEPAGE;
 	}
 
 	//getter setter
-	public List<ProductDto> getSpecialProducts() {
-		return specialProducts;
-	}
-
-	public void setSpecialProducts(List<ProductDto> specialProducts) {
-		this.specialProducts = specialProducts;
-	}
-
-	public List<ProductDto> getSaleProducts() {
-		return saleProducts;
-	}
-
-	public void setSaleProducts(List<ProductDto> saleProducts) {
-		this.saleProducts = saleProducts;
-	}
 }

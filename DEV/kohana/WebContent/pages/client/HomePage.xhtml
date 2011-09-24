@@ -10,20 +10,22 @@
 <ui:composition template="Client-template.xhtml">
 	<ui:param name="title" value="Trang chủ" />
 	<ui:define name="body">
-		<h3>Sản phẩm nổi bật</h3>
-		<hr></hr>
-		<h:panelGrid columns="5">
-			<c:forEach var="aProduct" items="#{homePageBean.specialProducts}">
-				<client:product data="#{aProduct}"/>
-			</c:forEach>
-		</h:panelGrid>
-		<h3>Sản phẩm khuyến mãi</h3>
-		<hr></hr>
-		<h:panelGrid columns="5">
-			<c:forEach var="aProduct" items="#{homePageBean.saleProducts}">
-				<client:product data="#{aProduct}"/>
-			</c:forEach>
-		</h:panelGrid>
+		<h:form>
+			<h3>Sản phẩm nổi bật</h3>
+			<hr></hr>
+			<h:panelGrid columns="5">
+				<c:forEach var="aProduct" items="#{homePageBean.specialProducts}">
+					<client:product data="#{aProduct}"/>
+				</c:forEach>
+			</h:panelGrid>
+			<h3>Sản phẩm khuyến mãi</h3>
+			<hr></hr>
+			<h:panelGrid columns="5">
+				<c:forEach var="aProduct" items="#{homePageBean.saleProducts}">
+					<client:product data="#{aProduct}"/>
+				</c:forEach>
+			</h:panelGrid>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

@@ -41,6 +41,12 @@
 			<isNotNull property="sale" prepend="and">
 				p.sale = #sale#
 			</isNotNull>
+			<isNotNull property="priceFrom" prepend="and">
+				((p.sale and p.sale_price &gt;= #priceFrom#) or (not p.sale and p.price &gt;= #priceFrom#))
+			</isNotNull>
+			<isNotNull property="priceTo" prepend="and">
+				((p.sale and p.sale_price &lt;= #priceTo#) or (not p.sale and p.price &lt;= #priceTo#))
+			</isNotNull>
 		</dynamic>
 	</select>
 	<insert id="insertProduct" parameterClass="vn.kohana.dto.ProductDto">

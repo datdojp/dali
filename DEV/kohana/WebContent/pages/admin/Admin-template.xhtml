@@ -22,6 +22,9 @@
 	
 	<h:form>
 		<h:commandLink value="Quản lý sản phẩm" action="#{manageProductBean.init}"/>
+		<h:commandLink value="Quản lý đặt hàng" action="#{manageOrderBean.load}">
+			<f:setPropertyActionListener target="#{manageOrderBean.statusCode}" value="NEW" />
+		</h:commandLink>
 	</h:form>
 	<br></br>
 	<br></br>

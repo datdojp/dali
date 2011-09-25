@@ -93,4 +93,22 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 		product.setSale(sale);
 		getProductDao().update(product);
 	}
+
+	@Transactional(rollbackFor=DataAccessException.class)
+	public List<ProductDto> searchProduct(String name, String cateCode, Integer priceFrom, Integer priceTo) {
+		ProductCriteria criteria = new ProductCriteria();
+		if(!KohanaUtils.isEmpty(name)) {
+			criteria.setName(name);
+		}
+		if(!KohanaUtils.isEmpty(cateCode)) {
+			criteria.setCateCode(cateCode);
+		}
+		if(priceFrom != null && priceFrom >= 0) {
+			criteria.setPriceFrom(priceFrom);
+		}
+		if(priceTo != null && priceTo >= 0) {
+			criteria.setPriceTo(priceTo);
+		}
+		return getProductDao().search(criteria);
+	}
 }

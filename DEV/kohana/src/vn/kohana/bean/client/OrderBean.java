@@ -3,12 +3,17 @@ package vn.kohana.bean.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import vn.kohana.bean.BaseBean;
 import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
 import vn.kohana.utils.KohanaUtils;
 
 public class OrderBean extends BaseBean {
+	//logger
+	private Logger logger = Logger.getLogger(OrderBean.class);
+	
 	//data
 	List<CartItem> items;
 	private String orderByName;
@@ -24,9 +29,11 @@ public class OrderBean extends BaseBean {
 	
 	//action
 	private int orderedProductId;
+	private boolean clearCartAfterSubmit;
 	public String orderOne() {
 		items = new ArrayList<CartItem>();
 		items.add(new CartItem(getProductService().getProduct(orderedProductId), 1));
+		clearCartAfterSubmit = false;
 		return KohanaConstants.PAGE_CLIENT_ORDER;
 	}
 	public String submit() {
@@ -66,6 +73,27 @@ public class OrderBean extends BaseBean {
 			}
 		}
 		
+		try {
+			if(theSame) {
+				getOrderService().createOrder(orderByName, orderByPhone, orderByAddress, 
+						orderByName, orderByPhone, orderByAddress, 
+						paymentCode, bankName, bankAccountNumber, items);
+			} else {
+				getOrderService().createOrder(orderByName, orderByPhone, orderByAddress, 
+						orderForName, orderForPhone, orderForAddress, 
+						paymentCode, bankName, bankAccountNumber, items);
+			}
+			if(clearCartAfterSubmit) {
+				CartBean cartBean = (CartBean) BeanUtils.getContextBean("cartBean");
+				cartBean.setItems(new ArrayList<CartItem>());
+			}
+			BeanUtils.getMessageBean().setMessage("Đơn đặt hàng của quý khách đã được gửi đi. Cảm ơn quý khách.");
+		} catch (Exception ex) {
+			logger.error(ex);
+			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_COMMON_ERROR);
+			return null;
+		}
+		return KohanaConstants.PAGE_CLIENT_HOMEPAGE;
 	}
 	
 	//getter setter
@@ -163,6 +191,12 @@ public class OrderBean extends BaseBean {
 
 	public void setTheSame(boolean theSame) {
 		this.theSame = theSame;
+	}
+	public boolean isClearCartAfterSubmit() {
+		return clearCartAfterSubmit;
+	}
+	public void setClearCartAfterSubmit(boolean clearCartAfterSubmit) {
+		this.clearCartAfterSubmit = clearCartAfterSubmit;
 	}
 	
 }

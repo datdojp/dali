@@ -30,6 +30,7 @@ public class CartBean extends BaseBean {
 	public String order() {
 		OrderBean orderBean = (OrderBean) BeanUtils.getContextBean("orderBean");
 		orderBean.setItems(items);
+		orderBean.setClearCartAfterSubmit(true);
 		return KohanaConstants.PAGE_CLIENT_ORDER;
 	}
 	public String clear() {

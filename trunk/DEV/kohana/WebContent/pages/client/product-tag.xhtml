@@ -18,7 +18,9 @@
 		<h:outputText value="#{data.price}" styleClass="previousPrice" rendered="#{data.sale}"/>
 		<h:outputText value="#{data.salePrice}" styleClass="price" rendered="#{data.sale}"/>
 		<h:panelGrid columns="2">
-			<h:commandButton value="Mua" action="#{orderBean.orderOne}"/>
+			<h:commandButton value="Mua" action="#{orderBean.orderOne}">
+				<f:setPropertyActionListener value="#{data.id}" target="#{orderBean.orderedProductId}"></f:setPropertyActionListener>
+			</h:commandButton>
 			<h:commandButton value="Thêm vào giỏ hàng" action="#{cartBean.add}">
 				<f:setPropertyActionListener target="#{cartBean.addedProductId}" value="#{data.id}"/>
 			</h:commandButton>

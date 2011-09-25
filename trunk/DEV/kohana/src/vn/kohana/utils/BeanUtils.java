@@ -9,7 +9,6 @@ import vn.kohana.bean.BaseBean;
 import vn.kohana.bean.MessageBean;
 import vn.kohana.bean.MstBean;
 
-//TODO refine it
 public class BeanUtils {
 	private static Logger logger = Logger.getLogger(BeanUtils.class);
 	

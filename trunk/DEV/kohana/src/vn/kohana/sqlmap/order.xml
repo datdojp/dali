@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-<sqlMap namespace="common">
+<sqlMap namespace="order">
+	<insert id="insertOrder" parameterClass="vn.kohana.dto.OrderDto">
+		insert into `order`(status_code, orderby_name, orderby_phone, orderby_address, orderfor_name, orderfor_phone, orderfor_address, payment_code, bank_name, bank_account_number, time)
+		values(#status.code#, #orderByName#, #orderByPhone#, #orderByAddress#, #orderForName#, #orderForPhone#, #orderForAddress#, #payment.code#, #bankName#, #bankAccountNumber#, NOW())
+	</insert>
+	<insert id="insertOrderProduct" parameterClass="map">
+		insert into order_product(order_id, product_id, quantity)
+		values(#order.id#, #product.id#, #quantity#)
+	</insert>
+	<select id="searchOrder" parameterClass="string" resultClass="vn.kohana.dto.OrderDto">
+		select
+			o.id,
+			o.status_code as `status.code`,
+			o.orderby_name as orderByName, 
+			o.orderby_phone as orderByPhone, 
+			o.orderby_address as orderByAddress, 
+			o.orderfor_name as orderForName, 
+			o.orderfor_phone as orderForPhone, 
+			o.orderfor_address as orderForAddress, 
+			o.payment_code as `payment.code`, 
+			p.description as `payment.description`,
+			bank_name as bankName, 
+			bank_account_number as bankAccountNumber, 
+			`time`
+		from `order` o, payment_mst p
+		where
+			o.status_code = #status# and
+			o.payment_code = p.code
+		order by `time` desc
+	</select>
+	<update id="updateOrderStatus" parameterClass="map">
+		update `order`
+		set status_code = #statusCode#
+		where id = #id#
+	</update>
 </sqlMap>

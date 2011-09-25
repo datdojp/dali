@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+<ui:composition template="Admin-template.xhtml">
+	<ui:param name="title" value="QUẢN LÝ ĐẶT HÀNG" />
+	<ui:define name="body">
+		<h:form>
+			<h:panelGrid columns="5">
+				<h:commandButton styleClass="NEW" value="Chưa xem" action="#{manageOrderBean.load}">
+					<f:setPropertyActionListener target="#{manageOrderBean.statusCode}" value="NEW"/>
+				</h:commandButton>
+				<h:commandButton styleClass="WTR" value="Chờ nhận tiền" action="#{manageOrderBean.load}">
+					<f:setPropertyActionListener target="#{manageOrderBean.statusCode}" value="WTR"/>
+				</h:commandButton>
+				<h:commandButton styleClass="DLR" value="Đang giao hàng" action="#{manageOrderBean.load}">
+					<f:setPropertyActionListener target="#{manageOrderBean.statusCode}" value="DLR"/>
+				</h:commandButton>
+				<h:commandButton styleClass="FIN" value="Đã xong" action="#{manageOrderBean.load}">
+					<f:setPropertyActionListener target="#{manageOrderBean.statusCode}" value="FIN"/>
+				</h:commandButton>
+				<h:commandButton styleClass="CAN" value="Bị hủy" action="#{manageOrderBean.load}">
+					<f:setPropertyActionListener target="#{manageOrderBean.statusCode}" value="CAN"/>
+				</h:commandButton>
+			</h:panelGrid>
+			<script>
+				$('.#{manageOrderBean.statusCode}').css('background-color', 'red');
+			</script>
+			<table cellpadding="5" cellspacing="0" border="1">
+				<tr>
+					<td></td>
+					<td>Người đặt</td>
+					<td>Người nhận</td>
+					<td>Phương thức thanh toán</td>
+					<td>Tên ngân hàng</td>
+					<td>Số tài khoản</td>
+					<td>Thời gian</td>
+					<td>Trạng thái tiếp theo</td>
+				</tr>
+				<c:forEach var="anOrder" items="#{manageOrderBean.orders}">
+					<tr>
+						<td></td>
+						<td>
+							#{anOrder.orderByName}
+							<br></br>
+							#{anOrder.orderByPhone}
+							<br></br>
+							#{anOrder.orderByAddress}
+						</td>
+						<td>
+							#{anOrder.orderForName}
+							<br></br>
+							#{anOrder.orderForPhone}
+							<br></br>
+							#{anOrder.orderForAddress}
+						</td>
+						<td>#{anOrder.payment.description}</td>
+						<td>#{anOrder.bankName}</td>
+						<td>#{anOrder.bankAccountNumber}</td>
+						<td>
+							<h:outputText value="#{anOrder.time}">
+								<f:convertDateTime pattern="dd/MM/yyyy hh:mm"/>
+							</h:outputText>
+						</td>
+						<td>
+							<h:commandButton value="Chưa xem" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'NEW'}">
+								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
+								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="NEW"/>
+							</h:commandButton>
+							<h:commandButton value="Chờ nhận tiền" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'WTR' and anOrder.payment.code eq 'TRF'}">
+								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
+								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="WTR"/>
+							</h:commandButton>
+							<h:commandButton value="Đang giao hàng" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'DLR'}">
+								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
+								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="DLR"/>
+							</h:commandButton>
+							<h:commandButton value="Đã xong" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'FIN'}">
+								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
+								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="FIN"/>
+							</h:commandButton>
+							<h:commandButton value="Bị hủy" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'CAN'}">
+								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
+								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="CAN"/>
+							</h:commandButton>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<t:div rendered="#{manageOrderBean.statusCode eq 'NEW'}">
+				<h:commandButton styleClass="btnPollNewOrders" style="display:none" action="#{manageOrderBean.load}"/>
+				<script>
+					setInterval(pollNewOrder, #{config.manageOrderPollingInterval});
+					function pollNewOrder() {
+						$('.btnPollNewOrders').click();
+					}
+				</script>
+			</t:div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

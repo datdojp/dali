@@ -6,6 +6,8 @@ public class ProductCriteria extends BaseCriteria {
 	private String name;
 	private Boolean special = null;
 	private Boolean sale = null;
+	private Integer priceFrom;
+	private Integer priceTo;
 	
 	//getter setter
 	public Boolean getSpecial() {
@@ -37,6 +39,18 @@ public class ProductCriteria extends BaseCriteria {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Integer getPriceFrom() {
+		return priceFrom;
+	}
+	public void setPriceFrom(Integer priceFrom) {
+		this.priceFrom = priceFrom;
+	}
+	public Integer getPriceTo() {
+		return priceTo;
+	}
+	public void setPriceTo(Integer priceTo) {
+		this.priceTo = priceTo;
 	}
 	
 }

@@ -62,10 +62,17 @@
 											<h:outputText value="Tên"/>
 											<h:inputText value="#{searchBean.name}"/>
 											
+											<h:outputText value="Loại" />
+											<h:selectOneListbox value="#{searchBean.categoryCode}" size="1">
+												<f:selectItem itemLabel="-" itemValue=""/>
+												<c:forEach var="aCate" items="#{mstBean.allCategories}">
+													<f:selectItem itemLabel="#{aCate.name}" itemValue="#{aCate.code}"/>
+												</c:forEach>
+											</h:selectOneListbox>
+											
 											<h:outputText value="Giá từ"/>
 											<h:selectOneListbox value="#{searchBean.priceFrom}" size="1">
-												<f:convertNumber/>
-												<f:selectItem itemLabel="-" itemValue=""/>
+												<f:selectItem itemLabel="-" itemValue="-1"/>
 												<f:selectItem itemLabel="100.000" itemValue="100"/>
 												<f:selectItem itemLabel="300.000" itemValue="300"/>
 												<f:selectItem itemLabel="500.000" itemValue="500"/>
@@ -75,8 +82,7 @@
 											
 											<h:outputText value="Giá đến"/>
 											<h:selectOneListbox value="#{searchBean.priceTo}" size="1">
-												<f:convertNumber/>
-												<f:selectItem itemLabel="-" itemValue=""/>
+												<f:selectItem itemLabel="-" itemValue="-1"/>
 												<f:selectItem itemLabel="100.000" itemValue="100"/>
 												<f:selectItem itemLabel="300.000" itemValue="300"/>
 												<f:selectItem itemLabel="500.000" itemValue="500"/>
@@ -118,6 +124,12 @@
 			</tr>
 		</table>
 	</div>
+	<script>
+		var message = '#{messageBean.message}';
+		if(message != '') {
+			alert(message);
+		}
+	</script>
 </h:body>
 </f:view>
 </html>

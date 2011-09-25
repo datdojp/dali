@@ -1,9 +1,12 @@
 package vn.kohana.dto;
 
+import java.util.Date;
+
 import vn.kohana.mst.OrderStatusMst;
 import vn.kohana.mst.PaymentMst;
 
 public class OrderDto extends BaseDto {
+	//data
 	private OrderStatusMst status;
 	private String orderByName;
 	private String orderByPhone;
@@ -12,7 +15,11 @@ public class OrderDto extends BaseDto {
 	private String orderForPhone;
 	private String orderForAddress;
 	private PaymentMst payment;
+	private String bankName;
+	private String bankAccountNumber;
+	private Date time;
 	
+	//getter setter
 	public OrderStatusMst getStatus() {
 		return status;
 	}
@@ -60,5 +67,23 @@ public class OrderDto extends BaseDto {
 	}
 	public void setPayment(PaymentMst payment) {
 		this.payment = payment;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getBankAccountNumber() {
+		return bankAccountNumber;
+	}
+	public void setBankAccountNumber(String bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
+	}
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }

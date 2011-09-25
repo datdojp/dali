@@ -10,7 +10,6 @@ import vn.kohana.dto.BaseDto;
 import vn.kohana.dto.ProductDto;
 import vn.kohana.mst.CategoryMst;
 
-//TODO refine it
 public class KohanaUtils {
 	//VALIDATOR
 	public static boolean isEmpty(String str) {

@@ -17,10 +17,9 @@ public class MstBean extends BaseBean {
 	
 	//getter setter
 	public List<CategoryMst> getAllCategories() {
-//		if(KohanaUtils.isEmpty(allCategories)) {
-//			loadSupCategories();
-//		} TODO
-		loadSupCategories();
+		if(KohanaUtils.isEmpty(allCategories)) {
+			loadSupCategories();
+		}
 		return allCategories;
 	}
 }

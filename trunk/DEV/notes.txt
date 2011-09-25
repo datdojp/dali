@@ -1,0 +1,3 @@
+check quantity khi order
+fix het todo
+ajax cho add to cart

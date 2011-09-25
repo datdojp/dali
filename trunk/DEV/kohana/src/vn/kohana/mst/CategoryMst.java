@@ -2,6 +2,8 @@ package vn.kohana.mst;
 
 import java.util.List;
 
+import vn.kohana.dto.ProductDto;
+
 public class CategoryMst extends BaseMst {
 	private String name;
 	private String image;
@@ -9,6 +11,7 @@ public class CategoryMst extends BaseMst {
 	
 	//transient
 	private List<CategoryMst> subcats;
+	private List<ProductDto> products;
 	
 	//getter setter
 	public String getName() {
@@ -34,6 +37,12 @@ public class CategoryMst extends BaseMst {
 	}
 	public void setSupcat(CategoryMst supcat) {
 		this.supcat = supcat;
+	}
+	public List<ProductDto> getProducts() {
+		return products;
+	}
+	public void setProducts(List<ProductDto> products) {
+		this.products = products;
 	}
 
 }

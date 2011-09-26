@@ -11,22 +11,22 @@
 	<ui:param name="title" value="Chi tiết giỏ hàng" />
 	<ui:define name="body">
 		<h:form>
-			<h:panelGrid columns="4">
+			<h:panelGrid columns="4" cellspacing="10">
 				<c:forEach var="anItem" items="#{cartBean.items}">
-					<h:graphicImage value="#{anItem.product.image}"/>
+					<h:graphicImage value="#{anItem.product.image}" width="75" height="75"/>
 					<h:outputText value="#{anItem.product.name}" />
 					<h:outputText value="#{anItem.product.price}" rendered="#{not anItem.product.sale}" styleClass="price"/>
 					<h:outputText value="#{anItem.product.salePrice}" rendered="#{anItem.product.sale}" styleClass="price"/>
 					<h:panelGroup>
 						<h:outputText value="Số lượng"/>
-						<h:inputText value="#{anItem.quantity}"/>
+						<h:inputText value="#{anItem.quantity}" style="width:20px"/>
 					</h:panelGroup>
 				</c:forEach>
 			</h:panelGrid>
 			<br></br>
 			<h:panelGrid columns="2">
-				<h:commandButton value="Đặt hàng" action="#{cartBean.order}" />
-				<h:commandButton value="Xóa giỏ hàng" action="#{cartBean.clear}" />
+				<h:commandButton value="Đặt hàng" action="#{cartBean.order}" styleClass="button"/>
+				<h:commandButton value="Xóa giỏ hàng" action="#{cartBean.clear}" styleClass="button"/>
 			</h:panelGrid>
 		</h:form>
 	</ui:define>

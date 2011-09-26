@@ -1,13 +1,56 @@
-.menuBtn {
-	border: 1px solid #D8DFEA;
-	height: 50px;
-	padding: 5px;
-	background-color: #EDEFF4;
+body {
+	font-family: verdana;
+	font-size: 10pt;
+	color: #7A152E;
+}
+
+td {
+	vertical-align: top;
+}
+
+a {
+	font-size: 9pt;
+}
+
+.input {
+	border: thin solid #7A152E;
+	background-color: white;
+}
+
+.button {
+	border: none;
+	background-color: #7EBC28;
+	color: white;
+	font-weight: bold;
+	font-family: arial;
+}
+
+.box {
+	border: thin solid #F55B81;
+	background-color: #F0DDE1;
+}
+
+.menu-bar {
+	vertical-align: middle;
+	border: none;
+	background-color: #7EBC28;
+	height: 40px;
+}
+
+.menu-bar-button {
+	border: none;
+	background-color: transparent;
+	color: white;
+	font-weight: bold;
+	font-family: arial;
+	font-size: 12pt;
+	cursor: pointer;
 }
 
 .previousPrice {
 	text-decoration: line-through;
 	color:red;
+	font-weight: bold;
 }
 
 .price {

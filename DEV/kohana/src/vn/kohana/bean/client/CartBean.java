@@ -3,10 +3,9 @@ package vn.kohana.bean.client;
 import java.util.ArrayList;
 import java.util.List;
 import vn.kohana.bean.BaseBean;
-import vn.kohana.dto.ProductDto;
+import vn.kohana.dto.CartItem;
 import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
-import vn.kohana.utils.KohanaUtils;
 
 public class CartBean extends BaseBean {
 	//data

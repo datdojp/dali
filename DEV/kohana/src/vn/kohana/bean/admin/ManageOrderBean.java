@@ -8,7 +8,7 @@ import vn.kohana.utils.KohanaUtils;
 
 public class ManageOrderBean extends BaseBean {
 	//data
-	private String statusCode;
+	private String statusCode = "NEW";
 	private List<OrderDto> orders;
 	
 	//action

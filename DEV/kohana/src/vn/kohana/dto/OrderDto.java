@@ -19,6 +19,23 @@ public class OrderDto extends BaseDto {
 	private String bankAccountNumber;
 	private Date time;
 	
+	//transient
+	public boolean isUnread() {
+		return status != null && "NEW".equals(status.getCode());
+	}
+	public boolean isWaitTransfer() {
+		return status != null && "WTR".equals(status.getCode());
+	}
+	public boolean isDelivering() {
+		return status != null && "DLR".equals(status.getCode());
+	}
+	public boolean isFinished() {
+		return status != null && "FIN".equals(status.getCode());
+	}
+	public boolean isCanceled() {
+		return status != null && "CAN".equals(status.getCode());
+	}
+	
 	//getter setter
 	public OrderStatusMst getStatus() {
 		return status;

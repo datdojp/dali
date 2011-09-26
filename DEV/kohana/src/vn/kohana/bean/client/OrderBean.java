@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import vn.kohana.bean.BaseBean;
+import vn.kohana.dto.CartItem;
 import vn.kohana.utils.BeanUtils;
 import vn.kohana.utils.KohanaConstants;
 import vn.kohana.utils.KohanaUtils;

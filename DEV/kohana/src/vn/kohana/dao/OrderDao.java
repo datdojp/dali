@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import vn.kohana.dto.CartItem;
 import vn.kohana.dto.OrderDto;
 import vn.kohana.dto.ProductDto;
 
@@ -31,5 +32,9 @@ public class OrderDao extends BaseDao {
 		params.put("id", id);
 		params.put("statusCode", statusCode);
 		getSqlMapClientTemplate().update("updateOrderStatus", params);
+	}
+	
+	public List<CartItem> getOrderProduct(int orderId) {
+		return getSqlMapClientTemplate().queryForList("getOrderProduct", orderId);
 	}
 }

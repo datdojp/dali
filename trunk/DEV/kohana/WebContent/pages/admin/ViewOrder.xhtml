@@ -8,26 +8,23 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:client="http://www.kohana.vn/client">
 <ui:composition template="Client-template.xhtml">
-	<ui:param name="title" value="Chi tiết giỏ hàng" />
+	<ui:param name="title" value="Trang chủ" />
 	<ui:define name="body">
 		<h:form>
 			<h:panelGrid columns="4">
-				<c:forEach var="anItem" items="#{cartBean.items}">
+				<c:forEach var="anItem" items="#{viewOrderBean.items}">
 					<h:graphicImage value="#{anItem.product.image}"/>
 					<h:outputText value="#{anItem.product.name}" />
 					<h:outputText value="#{anItem.product.price}" rendered="#{not anItem.product.sale}" styleClass="price"/>
 					<h:outputText value="#{anItem.product.salePrice}" rendered="#{anItem.product.sale}" styleClass="price"/>
-					<h:panelGroup>
-						<h:outputText value="Số lượng"/>
-						<h:inputText value="#{anItem.quantity}"/>
-					</h:panelGroup>
+					<h:outputText value="Số lượng: #{anItem.quantity}"/>
 				</c:forEach>
 			</h:panelGrid>
+			#{viewOrderBean.totalQuantity} sản phẩm.
 			<br></br>
-			<h:panelGrid columns="2">
-				<h:commandButton value="Đặt hàng" action="#{cartBean.order}" />
-				<h:commandButton value="Xóa giỏ hàng" action="#{cartBean.clear}" />
-			</h:panelGrid>
+			Tổng số tiền #{viewOrderBean.totalMoney}.000 đồng.
+			<br></br>
+			<h:commandButton value="Quay lại" action="#{manageOrderBean.load}"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -44,7 +44,11 @@
 				</tr>
 				<c:forEach var="anOrder" items="#{manageOrderBean.orders}">
 					<tr>
-						<td></td>
+						<td>
+							<h:commandButton value="Xem" action="#{viewOrderBean.init}">
+								<f:setPropertyActionListener target="#{viewOrderBean.orderId}" value="anOrder.id"/>
+							</h:commandButton>
+						</td>
 						<td>
 							#{anOrder.orderByName}
 							<br></br>
@@ -68,23 +72,23 @@
 							</h:outputText>
 						</td>
 						<td>
-							<h:commandButton value="Chưa xem" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'NEW'}">
+							<h:commandButton value="Chưa xem" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not anOrder.unread}">
 								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
 								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="NEW"/>
 							</h:commandButton>
-							<h:commandButton value="Chờ nhận tiền" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'WTR' and anOrder.payment.code eq 'TRF'}">
+							<h:commandButton value="Chờ nhận tiền" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not anOrder.waitTransfer and anOrder.payment.code eq 'TRF'}">
 								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
 								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="WTR"/>
 							</h:commandButton>
-							<h:commandButton value="Đang giao hàng" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'DLR'}">
+							<h:commandButton value="Đang giao hàng" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not anOrder.delivering}">
 								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
 								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="DLR"/>
 							</h:commandButton>
-							<h:commandButton value="Đã xong" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'FIN'}">
+							<h:commandButton value="Đã xong" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not anOrder.finished}">
 								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
 								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="FIN"/>
 							</h:commandButton>
-							<h:commandButton value="Bị hủy" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not manageOrderBean.statusCode eq 'CAN'}">
+							<h:commandButton value="Bị hủy" action="#{manageOrderBean.changeStatusForAnOrder}" rendered="#{not anOrder.canceled}">
 								<f:setPropertyActionListener target="#{manageOrderBean.id}" value="#{anOrder.id}"/>
 								<f:setPropertyActionListener target="#{manageOrderBean.desStatusCode}" value="CAN"/>
 							</h:commandButton>

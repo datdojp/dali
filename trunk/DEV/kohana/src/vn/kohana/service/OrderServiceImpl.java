@@ -2,10 +2,11 @@ package vn.kohana.service;
 
 import java.util.List;
 
-import org.apache.tomcat.jni.Status;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
-import vn.kohana.bean.client.CartItem;
+
+import vn.kohana.criteria.ProductCriteria;
+import vn.kohana.dto.CartItem;
 import vn.kohana.dto.OrderDto;
 import vn.kohana.mst.OrderStatusMst;
 import vn.kohana.mst.PaymentMst;
@@ -46,6 +47,17 @@ public class OrderServiceImpl extends BaseService implements OrderService {
 	@Transactional(rollbackFor=DataAccessException.class)
 	public void updateOrderStatus(int id, String statusCode) {
 		getOrderDao().updateStatus(id, statusCode);
+	}
+
+	@Transactional(rollbackFor=DataAccessException.class)
+	public List<CartItem> getOrderItems(int orderId) {
+		List<CartItem> items = getOrderDao().getOrderProduct(orderId);
+		for (CartItem anItem : items) {
+			ProductCriteria criteria = new ProductCriteria();
+			criteria.setId(anItem.getProduct().getId());
+			anItem.setProduct(getProductDao().search(criteria).get(0));
+		}
+		return items;
 	}
 
 }

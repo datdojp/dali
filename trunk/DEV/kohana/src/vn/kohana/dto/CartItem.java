@@ -1,8 +1,7 @@
-package vn.kohana.bean.client;
+package vn.kohana.dto;
 
 import java.io.Serializable;
 
-import vn.kohana.dto.ProductDto;
 
 public class CartItem implements Serializable {
 	//data

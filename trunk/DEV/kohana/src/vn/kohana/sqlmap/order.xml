@@ -35,4 +35,11 @@
 		set status_code = #statusCode#
 		where id = #id#
 	</update>
+	<select id="getOrderProduct" parameterClass="int" resultClass="vn.kohana.dto.CartItem">
+		select
+			product_id as `product.id`,
+			quantity
+		from order_product
+		where order_id = #orderId#
+	</select>
 </sqlMap>

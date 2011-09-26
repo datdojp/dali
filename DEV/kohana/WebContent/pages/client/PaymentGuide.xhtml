@@ -8,19 +8,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:client="http://www.kohana.vn/client">
 <ui:composition template="Client-template.xhtml">
-	<ui:param name="title" value="#{showCategoryBean.category.name}" />
+	<ui:param name="title" value="Hướng dẫn thanh toán" />
 	<ui:define name="body">
-		<h:form>
-			<c:forEach var="aSubCat" items="#{showCategoryBean.category.subcats}">
-				<h3>#{aSubCat.name}</h3>
-				<hr></hr>
-				<h:panelGrid columns="#{config.nProductsPerRow}">
-					<c:forEach var="aProduct" items="#{aSubCat.products}">
-						<client:product data="#{aProduct}"/>
-					</c:forEach>
-				</h:panelGrid>
-			</c:forEach>
-		</h:form>
+		<h4>Đang xây dựng</h4>			
 	</ui:define>
 </ui:composition>
 </html>

@@ -13,7 +13,7 @@
 		<h:form>
 			<h4>Hãy điền đầy đủ các thông tin sau</h4>
 			<br></br>
-			<table cellpadding="0" cellspacing="0">
+			<table cellpadding="5" cellspacing="7">
 				<tr>
 					<td><h:outputText value="Tên người đặt"/></td>
 					<td><h:inputText value="#{orderBean.orderByName}" /></td>
@@ -64,7 +64,7 @@
 			</table>
 			<h:commandButton styleClass="btnReload" style="display:none" action="#{orderBean.reload}"/>
 			<br></br>
-			<h:commandButton value="Đặt hàng" action="#{orderBean.submit}"/>
+			<h:commandButton value="Đặt hàng" action="#{orderBean.submit}" styleClass="button"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

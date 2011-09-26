@@ -8,19 +8,12 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:client="http://www.kohana.vn/client">
 <ui:composition template="Client-template.xhtml">
-	<ui:param name="title" value="#{showCategoryBean.category.name}" />
+	<ui:param name="title" value="Liên hệ" />
 	<ui:define name="body">
-		<h:form>
-			<c:forEach var="aSubCat" items="#{showCategoryBean.category.subcats}">
-				<h3>#{aSubCat.name}</h3>
-				<hr></hr>
-				<h:panelGrid columns="#{config.nProductsPerRow}">
-					<c:forEach var="aProduct" items="#{aSubCat.products}">
-						<client:product data="#{aProduct}"/>
-					</c:forEach>
-				</h:panelGrid>
-			</c:forEach>
-		</h:form>
+		<h4>Shop Hoa Cỏ May</h4>
+		<h5>Địa chỉ:</h5> 370 Nguyễn Trọng Tuyển, phường 8, quận Phú Nhuận, tp Hồ Chí Minh
+		<h5>Điện thoại đặt hàng:</h5> 0975.717.600
+		<h5>Trang web:</h5> www.comayshop.com
 	</ui:define>
 </ui:composition>
 </html>

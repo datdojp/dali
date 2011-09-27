@@ -3,4 +3,4 @@
 *ajax cho add to cart
 *check yahoo
 *background
-website icon
+*website icon

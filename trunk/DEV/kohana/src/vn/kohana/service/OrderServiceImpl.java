@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.kohana.criteria.ProductCriteria;
 import vn.kohana.dto.CartItem;
 import vn.kohana.dto.OrderDto;
+import vn.kohana.dto.ProductDto;
 import vn.kohana.mst.OrderStatusMst;
 import vn.kohana.mst.PaymentMst;
 
@@ -35,6 +36,15 @@ public class OrderServiceImpl extends BaseService implements OrderService {
 		order = getOrderDao().insert(order);
 		for (CartItem anItem : items) {
 			getOrderDao().insertOrderProduct(order, anItem.getProduct(), anItem.getQuantity());
+			
+			//deduct the quantity
+			ProductCriteria productCriteria = new ProductCriteria();
+			productCriteria.setId(anItem.getProduct().getId());
+			ProductDto product = getProductDao().search(productCriteria).get(0);
+			if(product.getQuantity() != null) {
+				product.setQuantity(product.getQuantity() - anItem.getQuantity());
+			}
+			getProductDao().update(product);
 		}
 		return order;
 	}

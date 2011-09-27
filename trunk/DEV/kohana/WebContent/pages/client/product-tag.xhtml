@@ -12,6 +12,8 @@
 		<h:panelGrid columns="1" style="text-align:center">
 			<h:graphicImage url="#{data.image}" width="150" height="150" style="border: thin solid #4BBDD6;"/>
 			<h:outputText value="#{data.name}"/>
+			<h:outputText value="Còn: #{data.quantity}" rendered="#{not empty data.quantity}"/>
+			<h:outputText value="Còn: không giới hạn" rendered="#{empty data.quantity}"/>
 			<h:outputText value="#{data.price}k" styleClass="price" rendered="#{not data.sale}"/>
 			<t:div style="width:100%">
 				<div align="center">
@@ -22,14 +24,15 @@
 					</h:panelGrid>
 				</div>
 			</t:div>
-			<t:div style="width:100%">
+			<t:div style="width:100%" rendered="#{empty data.quantity or data.quantity gt 0}">
 				<div align="center">
 					<h:panelGrid columns="2">
 						<h:commandLink value="Mua" action="#{orderBean.orderOne}">
 							<f:setPropertyActionListener value="#{data.id}" target="#{orderBean.orderedProductId}"></f:setPropertyActionListener>
 						</h:commandLink>
-						<h:commandLink value="Thêm vào giỏ" action="#{cartBean.add}">
-							<f:setPropertyActionListener target="#{cartBean.addedProductId}" value="#{data.id}"/>
+						<h:commandLink value="Thêm vào giỏ">
+							<f:param name="addedProductId" value="#{data.id}"/>
+							<f:ajax event="click" render=":cartForm:content" listener="#{cartBean.add}"/>
 						</h:commandLink>
 					</h:panelGrid>
 				</div>

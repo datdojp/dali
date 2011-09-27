@@ -1,3 +1,6 @@
-check quantity khi order
-fix het todo
-ajax cho add to cart
+*check quantity khi order
+*fix het todo
+*ajax cho add to cart
+*check yahoo
+*background
+website icon

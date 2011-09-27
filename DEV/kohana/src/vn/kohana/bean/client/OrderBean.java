@@ -74,6 +74,26 @@ public class OrderBean extends BaseBean {
 			}
 		}
 		
+		//check quantity
+		String notSufficientProducts = "";
+		for(CartItem anItem : items) {
+			//refresh
+			anItem.setProduct(getProductService().getProduct(anItem.getProduct().getId()));
+			if(anItem.getProduct().getQuantity() != null) {
+				if(anItem.getQuantity() > anItem.getProduct().getQuantity()) {
+					if(!KohanaUtils.isEmpty(notSufficientProducts)) {
+						notSufficientProducts = notSufficientProducts + ", ";
+					}
+					notSufficientProducts = notSufficientProducts + anItem.getProduct().getName() + "(còn " + anItem.getProduct().getQuantity() + ")";
+				}
+			}
+		}
+		if(!KohanaUtils.isEmpty(notSufficientProducts)) {
+			BeanUtils.getMessageBean().setMessage("Các sản phẩm sau không đủ số lượng: " + notSufficientProducts);
+			return null;
+		}
+		
+		
 		try {
 			if(theSame) {
 				getOrderService().createOrder(orderByName, orderByPhone, orderByAddress, 

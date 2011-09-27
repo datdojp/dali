@@ -19,5 +19,6 @@
 				supcat_code = #supcatCode#
 			</isNotNull>
 		</dynamic>
+		order by `order` asc
 	</select>
 </sqlMap>

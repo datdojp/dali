@@ -14,17 +14,18 @@
 			<h:outputText value="#{data.name}"/>
 			<h:outputText value="Còn: #{data.quantity}" rendered="#{not empty data.quantity}"/>
 			<h:outputText value="Còn: không giới hạn" rendered="#{empty data.quantity}"/>
-			<h:outputText value="#{data.price}k" styleClass="price" rendered="#{not data.sale}"/>
+			<h:outputText value="Giá: call" styleClass="price" rendered="#{empty data.price}"/>
+			<h:outputText value="#{data.price}k" styleClass="price" rendered="#{not data.sale and not empty data.price}"/>
 			<t:div style="width:100%">
 				<div align="center">
-					<h:panelGrid columns="3" rendered="#{data.sale}">
+					<h:panelGrid columns="3" rendered="#{data.sale and not empty data.price and not empty data.salePrice}">
 						<h:outputText value="#{data.price}k" styleClass="previousPrice" />
 						<h:graphicImage value="#{config.server}/img/client/arrow.png" />
 						<h:outputText value="#{data.salePrice}k" styleClass="price"/>	
 					</h:panelGrid>
 				</div>
 			</t:div>
-			<t:div style="width:100%" rendered="#{empty data.quantity or data.quantity gt 0}">
+			<t:div style="width:100%" rendered="#{(empty data.quantity or data.quantity gt 0) and not empty data.price}">
 				<div align="center">
 					<h:panelGrid columns="2">
 						<h:commandLink value="Mua" action="#{orderBean.orderOne}">

@@ -10,7 +10,7 @@
 <ui:composition>
 	<t:div style="width:150px">
 		<h:panelGrid columns="1" style="text-align:center">
-			<h:graphicImage url="#{data.image}" width="150" height="150" style="border: thin solid #4BBDD6;" onclick="enlargeImage('#{data.image}')"/>
+			<h:graphicImage url="#{data.image}" width="150" height="150" style="border: thin solid #4BBDD6;cursor:pointer;" onclick="enlargeImage('#{data.image}')"/>
 			<h:outputText value="#{data.name}"/>
 			<h:outputText value="Còn: #{data.quantity}" rendered="#{not empty data.quantity}"/>
 			<h:outputText value="Còn: không giới hạn" rendered="#{empty data.quantity}"/>

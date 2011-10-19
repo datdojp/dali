@@ -16,19 +16,6 @@ public class ProductDto extends BaseDto {
 	private boolean special;
 	private boolean sale;
 	
-	//utils
-	public String getCode() {
-//		if(KohanaUtils.isValidId(getId()) && category != null && category.getCode() != null) {
-//			return "" + category.getCode() + getId();
-//		} else {
-//			return null;
-//		}
-		if(KohanaUtils.isValidId(getId())) {
-			return getId().toString();
-		}
-		return null;
-	}
-	
 	//getter setter
 	public CategoryMst getCategory() {
 		return category;

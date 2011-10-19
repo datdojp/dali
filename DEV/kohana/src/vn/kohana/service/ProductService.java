@@ -14,7 +14,7 @@ public interface ProductService {
 	public List<ProductDto> getAllSpecialProducts();
 	public List<ProductDto> getAllSaleProducts();
 	public List<ProductDto> searchProduct(Integer id, String cateCode, String subcatCode, String name, Boolean special, Boolean sale);
-	public List<ProductDto> searchProduct(String name, String cateCode, Integer priceFrom, Integer priceTo);
+	public List<ProductDto> searchProduct(String name, String code, String cateCode, Integer priceFrom, Integer priceTo);
 	public ProductDto createProduct(String cateCode, String subcatCode, String name, String detail, Integer price,
 			Integer salePrice, Integer quantity, String image, boolean special, boolean sale);
 	public void updateProduct(Integer id, String cateCode, String subcatCode, String name, String detail, Integer price,

@@ -1,5 +1,6 @@
 package vn.kohana.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,7 +96,7 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 	}
 
 	@Transactional(rollbackFor=DataAccessException.class)
-	public List<ProductDto> searchProduct(String name, String cateCode, Integer priceFrom, Integer priceTo) {
+	public List<ProductDto> searchProduct(String name, String code, String cateCode, Integer priceFrom, Integer priceTo) {
 		ProductCriteria criteria = new ProductCriteria();
 		if(!KohanaUtils.isEmpty(name)) {
 			criteria.setName(name);
@@ -109,6 +110,22 @@ public class ProductServiceImpl extends BaseService implements ProductService {
 		if(priceTo != null && priceTo >= 0) {
 			criteria.setPriceTo(priceTo);
 		}
+		if(!KohanaUtils.isEmpty(code)) {
+//			if(code.length() <= 3) {
+//				return new ArrayList<ProductDto>();
+//			}
+//			String strId = code.substring(3);
+			String strId = code;
+			Integer id = null;
+			try {
+				id = Integer.parseInt(strId);
+			} catch (NumberFormatException ex) {
+				return new ArrayList<ProductDto>();
+			}
+			
+			criteria.setId(id);
+		}
+		
 		return getProductDao().search(criteria);
 	}
 }

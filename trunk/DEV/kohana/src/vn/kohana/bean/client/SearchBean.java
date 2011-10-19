@@ -10,6 +10,7 @@ import vn.kohana.utils.KohanaConstants;
 public class SearchBean extends BaseBean {
 	//criteria
 	private String name;
+	private String code;
 	private String categoryCode;
 	private Integer priceFrom;
 	private Integer priceTo;
@@ -19,7 +20,7 @@ public class SearchBean extends BaseBean {
 	
 	//action
 	public String search() {
-		results = getProductService().searchProduct(name, categoryCode, priceFrom, priceTo);
+		results = getProductService().searchProduct(name, code, categoryCode, priceFrom, priceTo);
 		return KohanaConstants.PAGE_CLIENT_SEARCH_RESULTS;
 	}
 
@@ -62,6 +63,14 @@ public class SearchBean extends BaseBean {
 
 	public void setResults(List<ProductDto> results) {
 		this.results = results;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

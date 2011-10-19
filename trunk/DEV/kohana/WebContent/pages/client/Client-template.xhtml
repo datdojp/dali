@@ -29,7 +29,7 @@
 				HOA CỎ MAY
 			</span>
 		</div>
-		<table cellpadding="5" cellspacing="5" style="width:100%; table-layout: fixed;" width="100%">
+		<table cellpadding="5" cellspacing="5" style="width:100%;" width="100%">
 			<tr>
 				<td colspan="2" class="menu-bar">
 					<!-- MENU BAR -->
@@ -68,6 +68,9 @@
 										<h:panelGrid columns="2">
 											<h:outputText value="Tên"/>
 											<h:inputText value="#{searchBean.name}" styleClass="input" style="width:125px"/>
+											
+											<h:outputText value="Mã"/>
+											<h:inputText value="#{searchBean.code}" styleClass="input" style="width:125px"/>
 											
 											<h:outputText value="Loại" />
 											<h:selectOneListbox value="#{searchBean.categoryCode}" size="1" styleClass="input" style="width:125px">
@@ -130,6 +133,11 @@
 									<a href="ymsgr:sendIM?saolaithe81205">
 										<img border="0" src="http://mail.opi.yahoo.com/online?u=saolaithe81205&amp;m=g&amp;t=2"/>
 									</a>
+									<br></br>
+									<a href="ymsgr:sendIM?hoacomay_370ntt">
+										<img border="0" src="http://mail.opi.yahoo.com/online?u=hoacomay_370ntt&amp;m=g&amp;t=2"/>
+									</a>
+									
 								</td>
 							</tr>
 							<tr>

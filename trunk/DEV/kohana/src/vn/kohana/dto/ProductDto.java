@@ -1,6 +1,7 @@
 package vn.kohana.dto;
 
 import vn.kohana.mst.CategoryMst;
+import vn.kohana.utils.KohanaUtils;
 
 public class ProductDto extends BaseDto {
 	private CategoryMst category;
@@ -14,6 +15,17 @@ public class ProductDto extends BaseDto {
 	private String image;
 	private boolean special;
 	private boolean sale;
+	
+	//utils
+	public String getCode() {
+		if(KohanaUtils.isValidId(getId()) && category != null && category.getCode() != null) {
+			return "" + category.getCode() + getId();
+		} else {
+			return null;
+		}
+	}
+	
+	//getter setter
 	public CategoryMst getCategory() {
 		return category;
 	}

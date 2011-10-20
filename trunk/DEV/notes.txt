@@ -8,6 +8,9 @@
 
 *add google map
 *product.code
-deploy
-read yahoo archive
-dang facebook & yahoo
+
+khi xem hinh fullscreen
+	co next va previous
+	gioi han kich thuong de thay duoc nut close
+cai thien toc do load trang chu
+trang tri lai cho dep

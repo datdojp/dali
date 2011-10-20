@@ -15,3 +15,5 @@ khi xem hinh fullscreen
 cai thien toc do load trang chu
 trang tri lai cho dep
 liet ke cac subcat o dau trang, bam vao se scroll xuong. co nut "tro ve dau trang"
+
+"Hãy nhập thông tin cho Ten nguoi dat"

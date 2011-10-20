@@ -14,3 +14,4 @@ khi xem hinh fullscreen
 	gioi han kich thuong de thay duoc nut close
 cai thien toc do load trang chu
 trang tri lai cho dep
+liet ke cac subcat o dau trang, bam vao se scroll xuong. co nut "tro ve dau trang"

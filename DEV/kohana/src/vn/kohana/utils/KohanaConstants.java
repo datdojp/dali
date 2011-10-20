@@ -14,8 +14,4 @@ public interface KohanaConstants {
 	public static final String PAGE_ADMIN_EDIT_PRODUCT = "/pages/admin/EditProduct.jsf";
 	public static final String PAGE_ADMIN_MANAGE_ORDER = "/pages/admin/ManageOrder.jsf";
 	public static final String PAGE_ADMIN_VIEW_ORDER = "/pages/admin/ViewOrder.jsf";
-	
-	/** MESSAGES **/
-	public static final String MSG_COMMON_ERROR = "Có lỗi xảy ra. Thao tác không thực hiện được";
-	public static final String MSG_MISSING_MANDATORY_FIELD = "Hãy nhập thông tin cho ";
 }

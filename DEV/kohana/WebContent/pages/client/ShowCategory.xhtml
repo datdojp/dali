@@ -11,8 +11,26 @@
 	<ui:param name="title" value="#{showCategoryBean.category.name}" />
 	<ui:define name="body">
 		<h:form>
+			<div>
+				<c:forEach var="aSubCat" items="#{showCategoryBean.category.subcats}">
+					<a href="#subCat_#{aSubCat.code}">
+						<h:outputFormat value="#{aSubCat.name}" />
+					</a>
+					<br></br>
+				</c:forEach>
+			</div>
+			<hr></hr>
 			<c:forEach var="aSubCat" items="#{showCategoryBean.category.subcats}">
-				<h3>#{aSubCat.name}</h3>
+				<table>
+					<tr>
+						<td>
+							<h1 id="subCat_#{aSubCat.code}">#{aSubCat.name}</h1>
+						</td>
+						<td style="vertical-align: middle;">
+							<a href="#top">Đầu trang</a>
+						</td>
+					</tr>
+				</table>
 				<hr></hr>
 				<h:panelGrid columns="#{config.nProductsPerRow}">
 					<c:forEach var="aProduct" items="#{aSubCat.products}">

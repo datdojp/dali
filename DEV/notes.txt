@@ -1,4 +1,4 @@
-*check quantity khi order
+﻿*check quantity khi order
 *fix het todo
 *ajax cho add to cart
 *check yahoo
@@ -9,11 +9,9 @@
 *add google map
 *product.code
 
-khi xem hinh fullscreen
-	co next va previous
-	gioi han kich thuong de thay duoc nut close
-cai thien toc do load trang chu
+*gioi han kich thuong de thay duoc nut close
+*cai thien toc do load trang chu
 trang tri lai cho dep
-liet ke cac subcat o dau trang, bam vao se scroll xuong. co nut "tro ve dau trang"
+*liet ke cac subcat o dau trang, bam vao se scroll xuong. co nut "tro ve dau trang"
 
-"Hãy nhập thông tin cho Ten nguoi dat"
+*"Hãy nhập thông tin cho Ten nguoi dat"

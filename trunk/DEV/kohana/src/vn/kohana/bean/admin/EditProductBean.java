@@ -56,7 +56,7 @@ public class EditProductBean extends BaseBean {
 	}
 	public String update() {
 		if(KohanaUtils.isEmpty(name)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Tên");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Tên");
 			return null;
 		}
 		Integer intPrice = null;

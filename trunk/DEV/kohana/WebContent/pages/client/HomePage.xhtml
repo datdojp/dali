@@ -11,17 +11,44 @@
 	<ui:param name="title" value="Trang chủ" />
 	<ui:define name="body">
 		<h:form>
-			<h3>Sản phẩm nổi bật</h3>
+			<a href="#noibat">Sản phẩm nổi bật</a>
+			<br></br>
+			<br></br>
+			<a href="#khuyenmai">Sản phẩm khuyến mãi</a>
+			<br></br>
+			<br></br>
 			<hr></hr>
+			<table>
+				<tr>
+					<td>
+						<h1 id="noibat">Sản phẩm nổi bật</h1>
+					</td>
+					<td style="vertical-align: middle;">
+						<a href="#top">Đầu trang</a>
+					</td>
+				</tr>
+			</table>
+			<hr></hr>
+			<c:set var="specialProducts" value="#{homePageBean.specialProducts}" scope="view"></c:set>
 			<h:panelGrid columns="#{config.nProductsPerRow}">
-				<c:forEach var="aProduct" items="#{homePageBean.specialProducts}">
+				<c:forEach var="aProduct" items="#{specialProducts}">
 					<client:product data="#{aProduct}"/>
 				</c:forEach>
 			</h:panelGrid>
-			<h3>Sản phẩm khuyến mãi</h3>
+			<table>
+				<tr>
+					<td>
+						<h1 id="khuyenmai">Sản phẩm khuyến mãi</h1>
+					</td>
+					<td style="vertical-align: middle;">
+						<a href="#top">Đầu trang</a>
+					</td>
+				</tr>
+			</table>
 			<hr></hr>
+			<c:set var="saleProducts" value="#{homePageBean.saleProducts}"></c:set>
 			<h:panelGrid columns="#{config.nProductsPerRow}">
-				<c:forEach var="aProduct" items="#{homePageBean.saleProducts}">
+				<c:forEach var="aProduct" items="#{saleProducts}">
 					<client:product data="#{aProduct}"/>
 				</c:forEach>
 			</h:panelGrid>

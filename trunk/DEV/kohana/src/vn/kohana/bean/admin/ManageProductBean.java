@@ -85,7 +85,7 @@ public class ManageProductBean extends BaseBean {
 			getProductService().deleteProduct(deletedProductId);
 			search();
 		} catch (Exception ex) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_COMMON_ERROR);
+			BeanUtils.getMessageBean().setMessage("Có lỗi xảy ra. Thao tác không thực hiện được");
 			logger.error(ex);
 		}
 		return null;

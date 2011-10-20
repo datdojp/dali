@@ -39,37 +39,37 @@ public class OrderBean extends BaseBean {
 	}
 	public String submit() {
 		if(KohanaUtils.isEmpty(orderByName)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Tên người đặt");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Tên người đặt");
 			return null;
 		}
 		if(KohanaUtils.isEmpty(orderByPhone)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Điện thoại người đặt");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Điện thoại người đặt");
 			return null;
 		}
 		if(KohanaUtils.isEmpty(orderByAddress)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Địa chỉ người đặt");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Địa chỉ người đặt");
 			return null;
 		}
 		
 		if(!theSame && KohanaUtils.isEmpty(orderForName)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Tên người nhận");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Tên người nhận");
 			return null;
 		}
 		if(!theSame && KohanaUtils.isEmpty(orderForPhone)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Điện thoại người nhận");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Điện thoại người nhận");
 			return null;
 		}
 		if(!theSame && KohanaUtils.isEmpty(orderForAddress)) {
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Địa chỉ người nhận");
+			BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Địa chỉ người nhận");
 			return null;
 		}
 		if(paymentCode.equals("TRF")) {
 			if(KohanaUtils.isEmpty(bankName)) {
-				BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Tên ngân hàng");
+				BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Tên ngân hàng");
 				return null;
 			}
 			if(KohanaUtils.isEmpty(bankAccountNumber)) {
-				BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_MISSING_MANDATORY_FIELD + "Số tài khoản");
+				BeanUtils.getMessageBean().setMessage("Hãy nhập thông tin cho " + "Số tài khoản");
 				return null;
 			}
 		}
@@ -111,7 +111,7 @@ public class OrderBean extends BaseBean {
 			BeanUtils.getMessageBean().setMessage("Đơn đặt hàng của quý khách đã được gửi đi. Cảm ơn quý khách.");
 		} catch (Exception ex) {
 			logger.error(ex);
-			BeanUtils.getMessageBean().setMessage(KohanaConstants.MSG_COMMON_ERROR);
+			BeanUtils.getMessageBean().setMessage("Có lỗi xảy ra. Thao tác không thực hiện được");
 			return null;
 		}
 		return KohanaConstants.PAGE_CLIENT_HOMEPAGE;
